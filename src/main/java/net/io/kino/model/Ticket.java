@@ -17,35 +17,48 @@ public class Ticket {
     @OneToOne
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
+    private Show show;
+    private TicketType ticketType;
     private Seat seat;
 
-    private String cokolwiek;
+    public Ticket() {
+    }
 
-    public Ticket() {}
-
-    public Ticket(Seat seat, String cokolwiek) {
+    public Ticket(Show show, TicketType ticketType, Seat seat) {
+        this.show = show;
+        this.ticketType = ticketType;
         this.seat = seat;
-        this.cokolwiek = cokolwiek;
     }
 
     public long getId() {
         return id;
     }
 
+    public Show getShow() {
+        return show;
+    }
+
+    public TicketType getTicketType() {
+        return ticketType;
+    }
+
     public Seat getSeat() {
         return seat;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setShow(Show show) {
+        this.show = show;
+    }
+
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
     }
 
     public void setSeat(Seat seat) {
         this.seat = seat;
     }
-
-    public String getCokolwiek() {
-        return cokolwiek;
-    }
-
-    public void setCokolwiek(String cokolwiek) {
-        this.cokolwiek = cokolwiek;
-    }
-
 }

@@ -49,7 +49,7 @@ public class TestController {
         Seat seat = new Seat(random.nextInt());
         seats.save(seat);
 
-        Ticket ticket = new Ticket(seat, "Cokolwiek");
+        Ticket ticket = new Ticket();
         tickets.save(ticket);
 
         return ticket;
