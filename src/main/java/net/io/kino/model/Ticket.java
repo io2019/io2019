@@ -20,14 +20,24 @@ public class Ticket {
     private Show show;
     private TicketType ticketType;
     private Seat seat;
+    private Long orderID;
 
     public Ticket() {
     }
 
-    public Ticket(Show show, TicketType ticketType, Seat seat) {
+    public Ticket(Show show, TicketType ticketType, Seat seat,Long orderID) {
         this.show = show;
         this.ticketType = ticketType;
         this.seat = seat;
+        this.orderID=orderID;
+    }
+
+    public Long getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(Long orderID) {
+        this.orderID = orderID;
     }
 
     public long getId() {

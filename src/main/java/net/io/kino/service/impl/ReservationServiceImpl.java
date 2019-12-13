@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
-
+//todo paypal, uporządkowanie maila (stworzenie nowej klasy+ udostęnienie metod statycznych)
 public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
@@ -49,7 +49,6 @@ public class ReservationServiceImpl implements ReservationService {
             return true;
         }
         else return false;
-
     }
 
     @Override
