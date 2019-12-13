@@ -11,19 +11,19 @@ import javax.persistence.*;
 public class TicketType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @OneToOne
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
     private String name;
-    private double Price;
-    private TicketState state;
+    private double price;
+    private boolean isActive;
 
-    public TicketType(String name, double price, TicketState state) {
+    public TicketType(String name, double price, boolean isActive) {
         this.name = name;
-        Price = price;
-        this.state = state;
+        this.price = price;
+        this.isActive = isActive;
     }
 
     public String getName() {
@@ -31,23 +31,23 @@ public class TicketType {
     }
 
     public double getPrice() {
-        return Price;
+        return price;
     }
 
-    public TicketState getState() {
-        return state;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setPrice(double price) {
-        Price = price;
+    public boolean getState() {
+        return isActive;
     }
 
-    public void setState(TicketState state) {
-        this.state = state;
+    public void setState(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public long getId() {
