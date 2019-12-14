@@ -1,7 +1,6 @@
 package net.io.kino.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -13,9 +12,6 @@ public class TicketType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    @JoinColumn
-    @JsonIdentityReference(alwaysAsId = true)
     private String name;
     private double price;
     private boolean isActive;

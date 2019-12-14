@@ -1,12 +1,10 @@
 package net.io.kino.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -16,8 +14,10 @@ public class Order implements Comparable<Order>
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @OneToMany
+    @JoinColumn
     private List<Ticket> tickets;
+
     private PersonalDetails client;
     private OrderState state;
 

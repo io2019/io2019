@@ -18,8 +18,16 @@ public class Ticket {
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
     private Show show;
+    @OneToOne
+    @JoinColumn
+    @JsonIdentityReference(alwaysAsId = true)
     private TicketType ticketType;
+    @OneToOne
+    @JoinColumn
+    @JsonIdentityReference(alwaysAsId = true)
     private Seat seat;
+    @ManyToOne
+    @JoinColumn
     private Long orderID;
 
     public Ticket() {
