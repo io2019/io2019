@@ -13,13 +13,21 @@ public class Order implements Comparable<Order>
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @OneToMany
-    @JoinColumn
+    private long id;
+    @OneToMany(
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<Ticket> tickets;
-
+    @Transient
     private PersonalDetails client;
+    @Enumerated(EnumType.STRING)
     private OrderState state;
+
+
+    public Order() {
+    }
 
     public Order(List<Ticket> tickets, PersonalDetails client, OrderState state) {
         this.tickets = tickets;

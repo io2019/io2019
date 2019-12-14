@@ -1,5 +1,6 @@
 package net.io.kino.model;
 
+
 public class PersonalDetails {
     private String name;
     private String Surname;

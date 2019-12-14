@@ -16,6 +16,9 @@ public class TicketType {
     private double price;
     private boolean isActive;
 
+    public TicketType() {
+    }
+
     public TicketType(String name, double price, boolean isActive) {
         this.name = name;
         this.price = price;

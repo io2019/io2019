@@ -19,6 +19,7 @@ public class KinoApplication {
     public static void main(String[] args) throws IOException, MessagingException {
         sendmail();
         SpringApplication.run(KinoApplication.class, args);
+
     }
     static private void sendmail() throws MessagingException, IOException {
         Properties props = new Properties();
@@ -35,7 +36,7 @@ public class KinoApplication {
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress("kinopol.rezerwacja@gmail.com", false));
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("i.tybinkowska01@gmail.com"));
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("i@gmail.com"));
         msg.setSubject("Tutorials point email");
         msg.setContent("Tutorials point email", "text/html");
         msg.setSentDate(new Date());

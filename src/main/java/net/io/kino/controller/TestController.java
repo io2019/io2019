@@ -55,9 +55,9 @@ public class TestController {
         return ticket;
     }
 
-    @GetMapping("/xd/{cokolwiek}")
-    public List<Ticket> get(@PathVariable String cokolwiek) {
-        return tickets.findTicketByCokolwiek(cokolwiek);
-    }
+//    @GetMapping("/xd/{cokolwiek}")
+//    public List<Ticket> get(@PathVariable String cokolwiek) {
+//        return tickets.findTicketByCokolwiek(cokolwiek);
+//    }
 
 }

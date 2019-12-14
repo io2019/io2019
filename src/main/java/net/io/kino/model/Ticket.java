@@ -17,35 +17,39 @@ public class Ticket {
     @OneToOne
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
+    private Seat seat;
+
+    @OneToOne
+    @JoinColumn
+    @JsonIdentityReference(alwaysAsId = true)
     private Show show;
+
     @OneToOne
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
     private TicketType ticketType;
-    @OneToOne
-    @JoinColumn
-    @JsonIdentityReference(alwaysAsId = true)
-    private Seat seat;
-    @ManyToOne
-    @JoinColumn
-    private Long orderID;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public Ticket() {
     }
 
-    public Ticket(Show show, TicketType ticketType, Seat seat,Long orderID) {
+
+    public Ticket(Seat seat, Show show, TicketType ticketType, Order order) {
+        this.seat = seat;
         this.show = show;
         this.ticketType = ticketType;
-        this.seat = seat;
-        this.orderID=orderID;
+        this.order = order;
     }
 
-    public Long getOrderID() {
-        return orderID;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderID(Long orderID) {
-        this.orderID = orderID;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public long getId() {

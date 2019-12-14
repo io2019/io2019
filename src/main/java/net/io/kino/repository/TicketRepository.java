@@ -10,6 +10,6 @@ import java.util.List;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     // Spring generuje zapytania do bazy na podstawie nazwy metody
-    List<Ticket> findTicketByCokolwiek(String cokolwiek);
+//    List<Ticket> findTicketByCokolwiek(String cokolwiek);
 
 }
