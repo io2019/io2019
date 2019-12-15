@@ -1,14 +1,12 @@
 package net.io.kino.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import sun.util.calendar.BaseCalendar;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,13 +18,26 @@ public class Showtime {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @OneToOne
+    @JsonIdentityReference(alwaysAsId = true)
     private Movie movie;
+    @OneToOne
+    @JsonIdentityReference(alwaysAsId = true)
     private Showroom showroom;
-    private Integer numberOfGuests;
-    private List<Seat> seats;
-    private BaseCalendar.Date date;
+
+    private Date date;
     private Time startHour;
     private Time finishHour;
+
+    public Showtime(){}
+
+    public Showtime(Movie movie, Showroom showroom, Date date, Time startHour, Time finishHour) {
+        this.movie = movie;
+        this.showroom = showroom;
+        this.date = date;
+        this.startHour = startHour;
+        this.finishHour = finishHour;
+    }
 
     public long getId() {
         return id;
@@ -45,27 +56,11 @@ public class Showtime {
         this.showroom = showroom;
     }
 
-    public Integer getNumberOfGuests() {
-        return numberOfGuests;
-    }
-
-    public void setNumberOfGuests(Integer numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
-    }
-
-    public List<Seat> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
-    }
-
-    public BaseCalendar.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(BaseCalendar.Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
