@@ -3,30 +3,15 @@ package net.io.kino.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Seat {
-
+public class ShowTime {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    private int numerek;
-
-    public Seat() {}
-
-    public Seat(int numerek) {
-        this.numerek = numerek;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public int getNumerek() {
-        return numerek;
-    }
-
 }

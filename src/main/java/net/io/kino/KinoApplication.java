@@ -17,5 +17,4 @@ public class KinoApplication {
     public Module hibernate5Module() {
         return new Hibernate5Module();
     }
-
 }

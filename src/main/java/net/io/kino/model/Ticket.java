@@ -1,51 +1,66 @@
 package net.io.kino.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
-@Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Embeddable
 public class Ticket {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private long id;
 
     @OneToOne
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
-    private Seat seat;
+    private ShowTime showTime;
 
-    private String cokolwiek;
+    @OneToOne
+    @JoinColumn
+    @JsonIdentityReference(alwaysAsId = true)
+    private TicketType ticketType;
 
-    public Ticket() {}
+    private Integer seatPosition;
 
-    public Ticket(Seat seat, String cokolwiek) {
-        this.seat = seat;
-        this.cokolwiek = cokolwiek;
+    public Ticket() {
+    }
+
+    public Ticket(Integer seatPosition, ShowTime showTime, TicketType ticketType) {
+        this.seatPosition = seatPosition;
+        this.showTime = showTime;
+        this.ticketType = ticketType;
     }
 
     public long getId() {
         return id;
     }
 
-    public Seat getSeat() {
-        return seat;
+    public ShowTime getShowTime() {
+        return showTime;
     }
 
-    public void setSeat(Seat seat) {
-        this.seat = seat;
+    public TicketType getTicketType() {
+        return ticketType;
     }
 
-    public String getCokolwiek() {
-        return cokolwiek;
+    public Integer getSeatPosition() {
+        return seatPosition;
     }
 
-    public void setCokolwiek(String cokolwiek) {
-        this.cokolwiek = cokolwiek;
+    public void setId(long id) {
+        this.id = id;
     }
 
+    public void setShowTime(ShowTime showTime) {
+        this.showTime = showTime;
+    }
+
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    public void setSeatPosition(Integer seatPosition) {
+        this.seatPosition = seatPosition;
+    }
 }

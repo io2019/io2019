@@ -1,63 +1,56 @@
 package net.io.kino.controller;
 
-import net.io.kino.model.Seat;
-import net.io.kino.model.Ticket;
-import net.io.kino.repository.SeatRepository;
-import net.io.kino.repository.TicketRepository;
-import net.io.kino.service.TicketService;
+import net.io.kino.model.Order;
+import net.io.kino.repository.OrdersRepository;
+import net.io.kino.service.EmailSender;
+import net.io.kino.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @RestController
-@RequestMapping("/tickets")
+@RequestMapping("/orders")
 public class TestController {
 
     @Autowired
-    private TicketRepository tickets;
+    private OrdersRepository orders;
 
     @Autowired
-    private SeatRepository seats;
+    private ReservationService reservationService;
 
     @Autowired
-    private TicketService ticketService;
-
-    private final Random random = new Random();
+    private EmailSender emailSender;
 
     @GetMapping
-    public List<Ticket> all() {
-        return tickets.findAll();
+    public List<Order> all() {
+        return orders.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Ticket> get(@PathVariable long id) {
-        return tickets.findById(id);
+    public Optional<Order> get(@PathVariable long id) {
+        return orders.findById(id);
     }
 
     @PatchMapping("/{id}")
-    public Optional<Ticket> confirm(@PathVariable long id) {
-        Optional<Ticket> ticket = tickets.findById(id);
-        ticket.ifPresent(value -> ticketService.confirmTicket(value));
-        return ticket;
+    public Optional<Order> confirm(@PathVariable long id) {
+        Optional<Order> order = orders.findById(id);
+        order.ifPresent(value -> reservationService.confirmOrder(value));
+        return order;
     }
 
     @PostMapping
-    public Ticket add() {
-        Seat seat = new Seat(random.nextInt());
-        seats.save(seat);
-
-        Ticket ticket = new Ticket(seat, "Cokolwiek");
-        tickets.save(ticket);
-
-        return ticket;
+    public Order add(String email) {
+        Order order = new Order(email);
+        orders.save(order);
+        return order;
     }
 
-    @GetMapping("/xd/{cokolwiek}")
-    public List<Ticket> get(@PathVariable String cokolwiek) {
-        return tickets.findTicketByCokolwiek(cokolwiek);
+    @RequestMapping(value = "/sendemail")
+    public String sendEmail(String email) {
+        Order order = new Order(email);
+        emailSender.sendEmail(order);
+        return "Email sent successfully";
     }
-
 }
