@@ -15,7 +15,8 @@ public class Seat {
 
     private int numerek;
 
-    public Seat() {}
+    public Seat() {
+    }
 
     public Seat(int numerek) {
         this.numerek = numerek;

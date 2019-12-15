@@ -1,11 +1,23 @@
 package net.io.kino.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
+@Embeddable
 public class PersonalDetails {
+
     private String name;
     private String surname;
+    @Column
     private String email;
     private String phone;
+
+    public PersonalDetails() {
+    }
+
+    public PersonalDetails(String email) {
+        this.email = email;
+    }
 
     public PersonalDetails(String name, String surname, String email, String phone) {
         this.name = name;

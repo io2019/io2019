@@ -1,17 +1,14 @@
 package net.io.kino.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
-@Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Embeddable
 public class Ticket {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private long id;
 
     @OneToOne
@@ -29,27 +26,13 @@ public class Ticket {
     @JsonIdentityReference(alwaysAsId = true)
     private TicketType ticketType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private Order order;
-
     public Ticket() {
     }
 
-
-    public Ticket(Seat seat, ShowTime showTime, TicketType ticketType, Order order) {
+    public Ticket(Seat seat, ShowTime showTime, TicketType ticketType) {
         this.seat = seat;
         this.showTime = showTime;
         this.ticketType = ticketType;
-        this.order = order;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public long getId() {

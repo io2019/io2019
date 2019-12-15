@@ -2,5 +2,8 @@ package net.io.kino.repository;
 
 import net.io.kino.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface OrdersRepository extends JpaRepository<Order, Long>{ }
+@Repository
+public interface OrdersRepository extends JpaRepository<Order, Long> {
+}
