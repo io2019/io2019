@@ -2,7 +2,6 @@ package net.io.kino.controller;
 
 import net.io.kino.model.Order;
 import net.io.kino.model.Seat;
-import net.io.kino.model.Ticket;
 import net.io.kino.repository.OrdersRepository;
 import net.io.kino.repository.SeatRepository;
 import net.io.kino.service.EmailSender;

@@ -9,14 +9,14 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Order implements Comparable<Order>{
+public class Order implements Comparable<Order> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ElementCollection
     @CollectionTable(
-            name="TICKET",
-            joinColumns=@JoinColumn(name="ORDER_ID")
+            name = "TICKET",
+            joinColumns = @JoinColumn(name = "ORDER_ID")
     )
     private List<Ticket> tickets;
     @Embedded
