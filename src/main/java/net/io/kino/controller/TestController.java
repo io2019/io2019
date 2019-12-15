@@ -1,11 +1,15 @@
 package net.io.kino.controller;
 
+import net.io.kino.model.Order;
 import net.io.kino.model.Seat;
 import net.io.kino.model.Ticket;
 import net.io.kino.repository.SeatRepository;
 import net.io.kino.repository.TicketRepository;
+import net.io.kino.service.EmailSender;
 import net.io.kino.service.TicketService;
+import net.io.kino.service.impl.EmailSenderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +28,9 @@ public class TestController {
 
     @Autowired
     private TicketService ticketService;
+
+    @Autowired
+    private EmailSender emailSender;
 
     private final Random random = new Random();
 
@@ -54,10 +61,11 @@ public class TestController {
 
         return ticket;
     }
-
-//    @GetMapping("/xd/{cokolwiek}")
-//    public List<Ticket> get(@PathVariable String cokolwiek) {
-//        return tickets.findTicketByCokolwiek(cokolwiek);
-//    }
-
+//todo sprawdzic jak przekazac maila (dodac go w konstruktorze)
+    @RequestMapping(value = "/sendemail")
+    public String sendEmail(){
+        Order order = new Order();
+        emailSender.sendEmail(order.getClient().getEmail(),order);
+        return "Email sent successfully";
+    }
 }

@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Show {
+public class ShowTime {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

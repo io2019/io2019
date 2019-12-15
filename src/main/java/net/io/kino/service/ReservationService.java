@@ -12,7 +12,8 @@ public interface ReservationService {
     boolean confirmOrder(Order order);
     boolean cancelOrder(Order order);
     boolean addTicketType(TicketType type);
-    boolean updateTicketTypeByID(Long id);
+    boolean activateTicketType(long id);
+    boolean deactivateTicketType(long id);
     List<TicketType> getTicketTypes();
     List<Order> getOrders();
 }

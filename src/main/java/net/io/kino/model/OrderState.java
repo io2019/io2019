@@ -1,7 +1,7 @@
 package net.io.kino.model;
 
 public enum OrderState {
-    wTrakcieRealizacji,
-    oplacone,
-    anulowane
+    inProgress,
+    paid,
+    cancelled
 }

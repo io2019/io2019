@@ -14,7 +14,6 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void confirmTicket(Ticket ticket) {
-        ticket.setId(12);
         tickets.save(ticket);
     }
 

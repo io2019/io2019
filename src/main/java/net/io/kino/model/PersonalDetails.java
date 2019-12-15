@@ -3,13 +3,13 @@ package net.io.kino.model;
 
 public class PersonalDetails {
     private String name;
-    private String Surname;
+    private String surname;
     private String email;
     private String phone;
 
     public PersonalDetails(String name, String surname, String email, String phone) {
         this.name = name;
-        Surname = surname;
+        this.surname = surname;
         this.email = email;
         this.phone = phone;
     }
@@ -23,11 +23,11 @@ public class PersonalDetails {
     }
 
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
-        Surname = surname;
+        this.surname = surname;
     }
 
     public String getEmail() {

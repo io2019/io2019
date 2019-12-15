@@ -1,7 +1,6 @@
 package net.io.kino.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -39,10 +38,6 @@ public class Order implements Comparable<Order>
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public List<Ticket> getTickets() {
         return tickets;
     }
@@ -69,10 +64,6 @@ public class Order implements Comparable<Order>
 
     @Override
     public int compareTo(Order order) {
-        if(getId()-order.getId()>0)
-            return 1;
-        else if(getId()-order.getId()<0)
-            return -1;
-        return 0;
+        return Long.compare(getId(), order.getId());
     }
 }

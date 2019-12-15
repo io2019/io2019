@@ -7,9 +7,4 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, Long> {
-
-    // Spring generuje zapytania do bazy na podstawie nazwy metody
-//    List<Ticket> findTicketByCokolwiek(String cokolwiek);
-
-}
+public interface TicketRepository extends JpaRepository<Ticket, Long> { }

@@ -22,7 +22,7 @@ public class Ticket {
     @OneToOne
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
-    private Show show;
+    private ShowTime showTime;
 
     @OneToOne
     @JoinColumn
@@ -37,9 +37,9 @@ public class Ticket {
     }
 
 
-    public Ticket(Seat seat, Show show, TicketType ticketType, Order order) {
+    public Ticket(Seat seat, ShowTime showTime, TicketType ticketType, Order order) {
         this.seat = seat;
-        this.show = show;
+        this.showTime = showTime;
         this.ticketType = ticketType;
         this.order = order;
     }
@@ -56,8 +56,8 @@ public class Ticket {
         return id;
     }
 
-    public Show getShow() {
-        return show;
+    public ShowTime getShowTime() {
+        return showTime;
     }
 
     public TicketType getTicketType() {
@@ -72,8 +72,8 @@ public class Ticket {
         this.id = id;
     }
 
-    public void setShow(Show show) {
-        this.show = show;
+    public void setShowTime(ShowTime showTime) {
+        this.showTime = showTime;
     }
 
     public void setTicketType(TicketType ticketType) {
