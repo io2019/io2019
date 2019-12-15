@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,8 +25,6 @@ public class Showtime {
     private Showroom showroom;
 
     private LocalDateTime date;
-    private Time startHour;
-    private Time finishHour;
 
     public Showtime() {}
 
@@ -33,7 +32,6 @@ public class Showtime {
         this.movie = movie;
         this.showroom = showroom;
         this.date = date;
-        this.startHour = startHour;
     }
 
     public long getId() {
@@ -64,19 +62,8 @@ public class Showtime {
         this.date = date;
     }
 
-    public Time getStartHour() {
-        return startHour;
+    public LocalDateTime getFinishHour() {
+        return date.plusMinutes(movie.getDuration().toMinutes());
     }
 
-    public void setStartHour(Time startHour) {
-        this.startHour = startHour;
-    }
-
-    public long getFinishHour() {
-        return startHour.getTime() + movie.getDuration().getTime();
-    }
-
-    public void setFinishHour(Time finishHour) {
-        this.finishHour = finishHour;
-    }
 }

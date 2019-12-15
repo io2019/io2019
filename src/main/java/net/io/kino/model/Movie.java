@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.time.Duration;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -18,12 +18,12 @@ public class Movie {
     private MovieCategory category;
 
     private String title;
-    private Time duration;
+    private Duration duration;
     private String description;
     private String director;
     private Integer ageRestriction;
 
-    public Movie(String title, Time duration, String description, String director,
+    public Movie(String title, Duration duration, String description, String director,
                  Integer ageRestriction, MovieCategory category) {
         this.title = title;
         this.duration = duration;
@@ -33,11 +33,17 @@ public class Movie {
         this.category = category;
     }
 
+    public MovieCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(MovieCategory category) {
+        this.category = category;
+    }
+
     public Movie(String title){
         this.title = title;
     }
-
-
 
     public String getTitle() {
         return title;
@@ -47,11 +53,11 @@ public class Movie {
         this.title = title;
     }
 
-    public Time getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
