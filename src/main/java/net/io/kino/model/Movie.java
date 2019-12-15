@@ -3,10 +3,7 @@ package net.io.kino.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
 
 @Entity
@@ -17,12 +14,30 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Enumerated(EnumType.STRING)
+    private MovieCategory category;
+
     private String title;
     private Time duration;
-    private Integer category;
     private String description;
     private String director;
     private Integer ageRestriction;
+
+    public Movie(String title, Time duration, String description, String director,
+                 Integer ageRestriction, MovieCategory category) {
+        this.title = title;
+        this.duration = duration;
+        this.description = description;
+        this.director = director;
+        this.ageRestriction = ageRestriction;
+        this.category = category;
+    }
+
+    public Movie(String title){
+        this.title = title;
+    }
+
+
 
     public String getTitle() {
         return title;
@@ -38,14 +53,6 @@ public class Movie {
 
     public void setDuration(Time duration) {
         this.duration = duration;
-    }
-
-    public Integer getCategory() {
-        return category;
-    }
-
-    public void setCategory(Integer category) {
-        this.category = category;
     }
 
     public String getDescription() {
