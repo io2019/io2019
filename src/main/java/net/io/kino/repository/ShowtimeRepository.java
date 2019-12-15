@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
 
-    List<Showtime> findAllInShowroom(String showroom);
+    List<Showtime> findShowtimeById(Long id);
+
 }
