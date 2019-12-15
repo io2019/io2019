@@ -14,7 +14,7 @@ public class Ticket {
     @OneToOne
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
-    private ShowTime showTime;
+    private Showtime showTime;
 
     @OneToOne
     @JoinColumn
@@ -26,7 +26,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Integer seatPosition, ShowTime showTime, TicketType ticketType) {
+    public Ticket(Integer seatPosition, Showtime showTime, TicketType ticketType) {
         this.seatPosition = seatPosition;
         this.showTime = showTime;
         this.ticketType = ticketType;
@@ -36,7 +36,7 @@ public class Ticket {
         return id;
     }
 
-    public ShowTime getShowTime() {
+    public Showtime getShowTime() {
         return showTime;
     }
 
@@ -52,7 +52,7 @@ public class Ticket {
         this.id = id;
     }
 
-    public void setShowTime(ShowTime showTime) {
+    public void setShowTime(Showtime showTime) {
         this.showTime = showTime;
     }
 
