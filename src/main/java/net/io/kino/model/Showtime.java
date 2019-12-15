@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.sql.Time;
-import java.util.Date;
-import java.util.List;
-
+import java.time.LocalDateTime;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -25,23 +23,23 @@ public class Showtime {
     @JsonIdentityReference(alwaysAsId = true)
     private Showroom showroom;
 
-    private Date date;
+    private LocalDateTime date;
     private Time startHour;
     private Time finishHour;
 
-    public Showtime(){}
+    public Showtime() {}
 
-    public Showtime(Movie movie, Showroom showroom, Date date, Time startHour, Time finishHour) {
+    public Showtime(Movie movie, Showroom showroom, LocalDateTime date, Time startHour, Time finishHour) {
         this.movie = movie;
         this.showroom = showroom;
         this.date = date;
         this.startHour = startHour;
-        this.finishHour = finishHour;
     }
 
     public long getId() {
         return id;
     }
+
     public Movie getMovie() {
         return movie;
     }
@@ -50,17 +48,19 @@ public class Showtime {
         this.movie = movie;
     }
 
-    public Showroom getShowroom() { return showroom; }
+    public Showroom getShowroom() {
+        return showroom;
+    }
 
     public void setShowroom(Showroom showroom) {
         this.showroom = showroom;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -72,12 +72,11 @@ public class Showtime {
         this.startHour = startHour;
     }
 
-    public Time getFinishHour() {
-        return finishHour;
+    public long getFinishHour() {
+        return startHour.getTime() + movie.getDuration().getTime();
     }
 
     public void setFinishHour(Time finishHour) {
         this.finishHour = finishHour;
     }
-
 }

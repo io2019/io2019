@@ -17,6 +17,13 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private String title;
+    private Time duration;
+    private Integer category;
+    private String description;
+    private String director;
+    private Integer ageRestriction;
+
     public String getTitle() {
         return title;
     }
@@ -64,12 +71,4 @@ public class Movie {
     public void setAgeRestriction(Integer ageRestriction) {
         this.ageRestriction = ageRestriction;
     }
-
-    private String title;
-    private Time duration;
-    private Integer category;
-    private String description;
-    private String director;
-    private Integer ageRestriction;
-
 }

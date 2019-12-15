@@ -16,9 +16,6 @@ public class TicketServiceImpl implements TicketService {
     public void confirmTicket(Ticket ticket) {
         ticket.setCokolwiek("abcd");
         tickets.save(ticket);
-
-
-
     }
 
 }

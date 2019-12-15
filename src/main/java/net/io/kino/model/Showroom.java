@@ -1,12 +1,12 @@
 package net.io.kino.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.*;
-import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -16,16 +16,18 @@ public class Showroom {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Showroom(String name, int numberOfSeats) {
-        this.name = name;
-        this.noOfSeats = numberOfSeats;
+    private String name;
+    private Integer noOfColumns;
+    private Integer noOfRows;
 
-        for (int i = 0; i <numberOfSeats ; i++) {
-            this.seats.add(new Seat(i));
-        }
+    public Showroom(String name, int numberOfRows, int numberOfColumns) {
+        this.name = name;
+        this.noOfColumns = numberOfColumns;
+        this.noOfRows = numberOfRows;
     }
 
     public Showroom() {}
+
     public String getName() {
         return name;
     }
@@ -34,21 +36,7 @@ public class Showroom {
         this.name = name;
     }
 
-    public Integer getNoOfSeats() {
-        return noOfSeats;
+    public Integer getNumberOfSeats(){
+        return this.noOfRows*this.noOfColumns;
     }
-
-    public void setNoOfSeats(Integer noOfSeats) {
-        this.noOfSeats = noOfSeats;
-    }
-
-    private String name;
-    private Integer noOfSeats;
-
-    @OneToMany
-    @JoinColumn
-    @JsonIdentityReference(alwaysAsId = true)
-    private List<Seat> seats;
-
-
 }
