@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,10 +22,9 @@ public class OrderController {
 
     @PostMapping
     public Order addOrder(@RequestBody OrderRequest orderRequest) {
-        reservationService.createOrder(orderRequest.getTickets()
+        return reservationService.createOrder(orderRequest.getTickets()
                 .stream().map(t -> t.convertToTicket(new Showtime())) //TODO: Get showtime from service
                 .collect(Collectors.toList()), orderRequest.getClient());
-        return new Order();
     }
 
     @PutMapping("/{id}")
@@ -36,8 +34,12 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public Order getOrder(@PathVariable Long id) {
-        return reservationService.getOrders().stream().filter(o -> o.getId() == id)
-                .findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Optional<Order> order = reservationService.findOrderById(id);
+        if (!order.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return order.get();
     }
 
     @GetMapping("/")
@@ -47,9 +49,12 @@ public class OrderController {
 
     @PatchMapping("/{orderId}")
     public ResponseEntity<HttpStatus> cancelOrder(@PathVariable Long orderId) {
-        Order order = reservationService.getOrders().stream().filter(o -> o.getId() == orderId)
-                .findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        reservationService.cancelOrder(order);
+        Optional<Order> order = reservationService.findOrderById(orderId);
+        if (!order.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        reservationService.cancelOrder(order.get());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
