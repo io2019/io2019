@@ -3,15 +3,15 @@ package net.io.kino.controller.dto;
 import net.io.kino.model.Order;
 
 public class OrderResponse extends Order {
-    private String redirecrURL;
+    private String redirectURL;
     private Long id;
 
-    public String getRedirecrURL() {
-        return redirecrURL;
+    public String getRedirectURL() {
+        return redirectURL;
     }
 
-    public void setRedirecrURL(String redirecrURL) {
-        this.redirecrURL = redirecrURL;
+    public void setRedirectURL(String redirectURL) {
+        this.redirectURL = redirectURL;
     }
 
     @Override
