@@ -6,9 +6,10 @@ import net.io.kino.model.Ticket;
 import net.io.kino.model.TicketType;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReservationService {
-    boolean createOrder(List<Ticket> tickets, PersonalDetails client);
+    Order createOrder(List<Ticket> tickets, PersonalDetails client);
 
     boolean confirmOrder(Order order);
 
@@ -19,6 +20,10 @@ public interface ReservationService {
     boolean activateTicketType(long id);
 
     boolean deactivateTicketType(long id);
+
+    Optional<Order> findOrderById(long id);
+
+    Optional<TicketType> findTicketTypeById(long id);
 
     List<TicketType> getTicketTypes();
 

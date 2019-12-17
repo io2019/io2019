@@ -24,9 +24,9 @@ public class ReservationServiceImpl implements ReservationService {
     private EmailSender emailSender;
 
     @Override
-    public boolean createOrder(List<Ticket> tickets, PersonalDetails client) {
+    public Order createOrder(List<Ticket> tickets, PersonalDetails client) {
         Order order = new Order(tickets, client, OrderState.inProgress);
-        return orders.save(order) != null;
+        return orders.save(order);
     }
 
     @Override
@@ -63,6 +63,16 @@ public class ReservationServiceImpl implements ReservationService {
             temp.get().setState(false);
             return true;
         } else return false;
+    }
+
+    @Override
+    public Optional<Order> findOrderById(long id) {
+        return orders.findById(id);
+    }
+
+    @Override
+    public Optional<TicketType> findTicketTypeById(long id) {
+        return ticketTypes.findById(id);
     }
 
     @Override
