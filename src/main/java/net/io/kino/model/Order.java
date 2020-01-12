@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,8 @@ public class Order implements Comparable<Order> {
     private PersonalDetails client;
     @Enumerated(EnumType.STRING)
     private OrderState state;
+    private LocalDateTime date;
+
 
     public Order() {
     }

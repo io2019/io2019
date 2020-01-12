@@ -1,5 +1,6 @@
 package net.io.kino.controller;
 
+import net.io.kino.controller.converter.StringToDateConverter;
 import net.io.kino.controller.dto.OrderRequest;
 import net.io.kino.model.Order;
 import net.io.kino.model.Showtime;
@@ -16,6 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/orders")
 public class OrderController {
 
     ReservationService reservationService;
@@ -38,12 +40,20 @@ public class OrderController {
         if (!order.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-
         return order.get();
     }
 
+    @GetMapping("/date")
+    public List<Order> getOrdersBetweenDates(@RequestParam(name = "fromDate") String from,
+                                        @RequestParam(name = "toDate") String to){
+        StringToDateConverter converter = new StringToDateConverter();
+        LocalDate fromDate = converter.convert(from);
+        LocalDate toDate = converter.convert(to);
+        return reservationService.getOrdersBetweenDates(fromDate, toDate);
+    }
+
     @GetMapping("/")
-    public List<Order> getOrders(@RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
+    public List<Order> getOrders(){
         return reservationService.getOrders();
     }
 

@@ -5,6 +5,7 @@ import net.io.kino.model.PersonalDetails;
 import net.io.kino.model.Ticket;
 import net.io.kino.model.TicketType;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,5 +28,10 @@ public interface ReservationService {
 
     List<TicketType> getTicketTypes();
 
+    List<Order> getOrdersBetweenDates(LocalDate fromDate, LocalDate toDate);
+
     List<Order> getOrders();
+
+
+
 }

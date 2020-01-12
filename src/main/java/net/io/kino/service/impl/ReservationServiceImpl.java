@@ -8,6 +8,9 @@ import net.io.kino.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,7 +84,15 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public List<Order> getOrdersBetweenDates(LocalDate fromDate, LocalDate toDate) {
+        LocalDateTime from = fromDate.atStartOfDay();
+        LocalDateTime to = fromDate.atTime(23, 59, 59);
+        return orders.findOrdersByDateBetween(from,to);
+    }
+
+    @Override
     public List<Order> getOrders() {
         return orders.findAll();
     }
+
 }

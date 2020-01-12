@@ -1,5 +1,9 @@
 package net.io.kino.service;
 
-public interface ShowtimeService {
+import net.io.kino.model.Order;
 
+import java.util.Optional;
+
+public interface ShowtimeService {
+    Optional<Order> findShowtimeById(long id);
 }
