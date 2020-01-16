@@ -52,7 +52,7 @@ public class Ticket {
         this.id = id;
     }
 
-    public void setShowTime(Showtime showtime) {
+    public void setShowtime(Showtime showtime) {
         this.showtime = showtime;
     }
 
