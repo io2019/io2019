@@ -1,7 +1,7 @@
 package net.io.kino.service.impl;
 
 import net.io.kino.repository.ManagersRepository;
-import net.io.kino.model.User;
+import net.io.kino.model.Manager;
 import net.io.kino.service.AuthenticationManager;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +21,19 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     private ManagersRepository managers;
 
     @Override
-    public boolean login(User user) throws Exception {
-        if(authenticate(user)) {
-            user.setStatus(true);
-            return true;
-        }
-        else {
-            user.setStatus(false);
-            return false;
-        }
-
+    public boolean login(String username, String password) throws Exception {
+        return authenticate(username, password);
     }
 
     @Override
-    public boolean logout(User user) {
-        if(user.getStatus()){
-            user.setStatus(false);
-            return true;
-        }
-        else{
-            return false;
-        }
+    public boolean logout(Manager user) {
+        return false;
     }
 
     // check if hash of a given password corresponds with a password in database
     @Override
-    public boolean authenticate(User user) throws Exception {
-        User found = managers.getOne(user.getID());
+    public boolean authenticate(String username, String password) throws Exception {
+        Manager found = managers.getOne(username);
         String stored = found.getPassword();
 
         String[] saltAndHash = stored.split("\\$");
@@ -55,7 +41,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
             throw new IllegalStateException(
                     "Stored password doesn't have a form 'salt$hash'");
         }
-        String hashOfInput = hash(user.getPassword(), Base64.decodeBase64(saltAndHash[0]));
+        String hashOfInput = hash(password, Base64.decodeBase64(saltAndHash[0]));
         return hashOfInput.equals(saltAndHash[1]);
     }
 
