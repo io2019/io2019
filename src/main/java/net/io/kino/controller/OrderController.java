@@ -33,7 +33,12 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public ResponseEntity<HttpStatus> updateOrder(@PathVariable Long id, @RequestBody OrderRequest orderRequest) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        Optional<Order> order = reservationService.findOrderById(id);
+        if (!order.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        reservationService.confirmOrder(order.get());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}")

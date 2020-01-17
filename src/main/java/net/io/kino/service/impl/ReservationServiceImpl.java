@@ -28,7 +28,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Order createOrder(List<Ticket> tickets, PersonalDetails client) {
-        Order order = new Order(tickets, client, OrderState.inProgress);
+        Order order = new Order(tickets, client, OrderState.inProgress, LocalDateTime.now());
         return orders.save(order);
     }
 

@@ -41,8 +41,23 @@ public class Order implements Comparable<Order> {
         this.state = state;
     }
 
+    public Order(List<Ticket> tickets, PersonalDetails client, OrderState state, LocalDateTime date) {
+        this.tickets = tickets;
+        this.client = client;
+        this.state = state;
+        this.date = date;
+    }
+
     public long getId() {
         return id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public List<Ticket> getTickets() {
