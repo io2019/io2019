@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
@@ -21,7 +23,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     private ManagersRepository managers;
 
     @Override
-    public boolean login(String username, String password) throws Exception {
+    public boolean login(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
         return authenticate(username, password);
     }
 
@@ -32,7 +34,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
     // check if hash of a given password corresponds with a password in database
     @Override
-    public boolean authenticate(String username, String password) throws Exception {
+    public boolean authenticate(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Manager found = managers.getOne(username);
         String stored = found.getPassword();
 
@@ -46,14 +48,14 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     }
 
     // compute salted PBKDF2 hash of given password
-    public static String getSaltedHash(String password) throws Exception {
+    public static String getSaltedHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         byte[] salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(saltLen);
         // store the salt with the password
         return Base64.encodeBase64String(salt) + "$" + hash(password, salt);
     }
 
 
-    private static String hash(String password, byte[] salt) throws Exception {
+    private static String hash(String password, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException {
         if (password == null || password.length() == 0)
             throw new IllegalArgumentException("Empty passwords are not supported.");
         SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
