@@ -11,12 +11,12 @@ public class Ticket {
     @Column
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
     private Showtime showtime;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     @JsonIdentityReference(alwaysAsId = true)
     private TicketType ticketType;

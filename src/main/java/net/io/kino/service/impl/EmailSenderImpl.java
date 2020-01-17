@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class EmailSenderImpl implements EmailSender {
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -20,19 +23,19 @@ public class EmailSenderImpl implements EmailSender {
         msg.setTo(order.getClient().getEmail());
         msg.setSubject("Potwierdzenie zakupu biletu");
 
-        String emailContent = "Dzień Dobry "+order.getClient().getName()+" "+order.getClient().getSurname()+"\n" +
+        String emailContent = "Dzień Dobry, "+order.getClient().getName()+" "+order.getClient().getSurname()+"\n" +
                 "Dziękujemy za skorzystanie z usług serwisu internetowego Kinopol. \n" +
                 "Poniżej przesyłamy podsumowanie Twojej transakcji zakupu biletów. \n" +
                 "Numer zamówienia: "+ order.getId()+"\n" +
                 "Film: "+order.getTickets().get(0).getShowtime().getMovie().getTitle()+"\n" +
-                "Data: "+order.getTickets().get(0).getShowtime().getDate().toString()+"\n" +
+                "Data: "+order.getTickets().get(0).getShowtime().getDate().format(formatter)+"\n" +
                 "Sala: "+order.getTickets().get(0).getShowtime().getShowroom().getName()+"\n" +
-                "Bilety: ";
+                "Twoje Bilety: \n";
 
         for (Ticket ticket: order.getTickets()
              ) {
-            emailContent = emailContent + "Bilet id: "+ticket.getId()+"\t Miejsce: " + ticket.getSeatPosition()+" \t" +
-                    " typ biletu: "+ticket.getTicketType().getName();
+            emailContent = emailContent + "Numer biletu: "+ticket.getId()+"\t Miejsce: " + ticket.getSeatPosition()+" \t" +
+                    " Typ biletu: "+ticket.getTicketType().getName()+" \n";
             
         }
 

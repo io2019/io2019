@@ -2,8 +2,8 @@ package net.io.kino.controller;
 
 import net.io.kino.controller.converter.StringToDateConverter;
 import net.io.kino.controller.dto.OrderRequest;
-import net.io.kino.model.Order;
-import net.io.kino.model.Showtime;
+import net.io.kino.model.*;
+import net.io.kino.service.EmailSender;
 import net.io.kino.service.ReservationService;
 import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
