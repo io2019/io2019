@@ -1,10 +1,10 @@
 package net.io.kino.service;
 
-import net.io.kino.model.User;
+import net.io.kino.model.Manager;
 
 
 public interface AuthenticationManager {
-    boolean login(User user) throws Exception;
-    boolean logout(User user);
-    boolean authenticate(User user) throws Exception;
+    boolean login(String username, String password) throws Exception;
+    boolean logout(Manager user);
+    boolean authenticate(String username, String password) throws Exception;
 }
