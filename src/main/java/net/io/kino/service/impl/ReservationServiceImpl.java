@@ -1,5 +1,8 @@
 package net.io.kino.service.impl;
 
+import com.braintreepayments.http.HttpResponse;
+import com.braintreepayments.http.serializer.Json;
+import com.paypal.orders.OrdersGetRequest;
 import net.io.kino.model.*;
 import net.io.kino.repository.OrdersRepository;
 import net.io.kino.repository.TicketTypesRepository;
@@ -8,14 +11,16 @@ import net.io.kino.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
-public class ReservationServiceImpl implements ReservationService {
+public class ReservationServiceImpl extends PayPalClientServiceImpl implements ReservationService {
 
     @Autowired
     private OrdersRepository orders;
@@ -31,6 +36,31 @@ public class ReservationServiceImpl implements ReservationService {
         Order order = new Order(tickets, client, OrderState.inProgress, LocalDateTime.now());
         return orders.save(order);
     }
+
+    @Override
+    public boolean verifyOrder(Order order) {
+        OrdersGetRequest request = new OrdersGetRequest(String.valueOf(order.getId()));
+        HttpResponse<com.paypal.orders.Order> response = null;
+        try {
+            response = client().execute(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(response.result() != null && response.result().status().equals("COMPLETED"))
+        {
+            confirmOrder(order);
+            return true;
+
+        }
+        else
+        {
+            cancelOrder(order);
+            return false;
+        }
+
+    }
+
 
     @Override
     public boolean confirmOrder(Order order) {

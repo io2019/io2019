@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface ReservationService {
     Order createOrder(List<Ticket> tickets, PersonalDetails client);
 
+    boolean verifyOrder(Order order);
+
     boolean confirmOrder(Order order);
 
     boolean cancelOrder(Order order);
