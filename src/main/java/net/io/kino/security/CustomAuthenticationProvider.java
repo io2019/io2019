@@ -9,6 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 
 import java.util.ArrayList;
 
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private AuthenticationManager auth;
