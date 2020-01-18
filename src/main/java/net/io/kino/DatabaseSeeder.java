@@ -16,7 +16,7 @@ public class DatabaseSeeder {
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-        if (!managersRepository.existsById("admin")) {
+        if (managersRepository.findAll().isEmpty()) {
             Manager manager = new Manager();
             manager.setUsername("admin");
             manager.setPassword(AuthenticationManagerImpl.getSaltedHash("dupa"));
