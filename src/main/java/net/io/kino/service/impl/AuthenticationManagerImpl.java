@@ -17,7 +17,7 @@ import java.security.spec.InvalidKeySpecException;
 @Service
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
-    private static final int iterations = 20*1000;
+    private static final int iterations = 20 * 1000;
     private static final int saltLen = 32;
     private static final int desiredKeyLen = 256;
 
@@ -28,7 +28,6 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     public boolean login(String username, String password) {
         return authenticate(username, password);
     }
-
 
     // check if hash of a given password corresponds with a password in database
     @Override
@@ -49,8 +48,8 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     public static String getSaltedHash(String password) {
         byte[] salt = new byte[0];
 
-        try{
-           salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(saltLen);
+        try {
+            salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(saltLen);
         } catch (NoSuchAlgorithmException ex) {
             System.out.println(ex.getMessage());
         }
@@ -58,11 +57,10 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         return Base64.encodeBase64String(salt) + "$" + hash(password, salt);
     }
 
-
-    private static String hash(String password, byte[] salt){
+    private static String hash(String password, byte[] salt) {
         SecretKey key = null;
 
-        try{
+        try {
             SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             key = f.generateSecret(new PBEKeySpec(
                     password.toCharArray(), salt, iterations, desiredKeyLen));
@@ -73,6 +71,5 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         assert key != null;
         return Base64.encodeBase64String(key.getEncoded());
     }
-
 
 }

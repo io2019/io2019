@@ -20,7 +20,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) {
 
-        try{
+        try {
             String name = authentication.getName();
             String password = authentication.getCredentials().toString();
 
@@ -30,7 +30,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             } else {
                 return null;
             }
-        } catch (AuthenticationException ex){
+        } catch (AuthenticationException ex) {
             System.out.println(ex.getMessage());
         }
 
@@ -41,4 +41,5 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
+
 }
