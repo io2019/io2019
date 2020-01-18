@@ -86,7 +86,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Order> getOrdersBetweenDates(LocalDate fromDate, LocalDate toDate) {
         LocalDateTime from = fromDate.atStartOfDay();
-        LocalDateTime to = fromDate.atTime(23, 59, 59);
+        LocalDateTime to = toDate.atTime(23, 59, 59);
         return orders.findOrdersByDateBetween(from,to);
     }
 

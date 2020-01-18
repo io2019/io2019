@@ -17,10 +17,10 @@ public class Showtime {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JsonIdentityReference(alwaysAsId = true)
     private Movie movie;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JsonIdentityReference(alwaysAsId = true)
     private Showroom showroom;
 

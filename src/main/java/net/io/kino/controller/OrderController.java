@@ -36,12 +36,7 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public ResponseEntity<HttpStatus> updateOrder(@PathVariable Long id, @RequestBody OrderRequest orderRequest) {
-        Optional<Order> order = reservationService.findOrderById(id);
-        if (!order.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        reservationService.confirmOrder(order.get());
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -53,17 +48,8 @@ public class OrderController {
         return order.get();
     }
 
-    @GetMapping("/date")
-    public List<Order> getOrdersBetweenDates(@RequestParam(name = "fromDate") String from,
-                                        @RequestParam(name = "toDate") String to){
-        StringToDateConverter converter = new StringToDateConverter();
-        LocalDate fromDate = converter.convert(from);
-        LocalDate toDate = converter.convert(to);
-        return reservationService.getOrdersBetweenDates(fromDate, toDate);
-    }
-
     @GetMapping("/")
-    public List<Order> getOrders(){
+    public List<Order> getOrders(@RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
         return reservationService.getOrders();
     }
 

@@ -19,30 +19,39 @@ public class EmailSenderImpl implements EmailSender {
 
     @Override
     public void sendEmail(Order order) {
+        StringBuilder stringBuilder = new StringBuilder();
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(order.getClient().getEmail());
         msg.setSubject("Potwierdzenie zakupu biletu");
 
-        String emailContent = "Dzień Dobry, "+order.getClient().getName()+" "+order.getClient().getSurname()+"\n" +
-                "Dziękujemy za skorzystanie z usług serwisu internetowego Kinopol. \n" +
-                "Poniżej przesyłamy podsumowanie Twojej transakcji zakupu biletów. \n" +
-                "Numer zamówienia: "+ order.getId()+"\n" +
-                "Film: "+order.getTickets().get(0).getShowtime().getMovie().getTitle()+"\n" +
-                "Data: "+order.getTickets().get(0).getShowtime().getDate().format(formatter)+"\n" +
-                "Sala: "+order.getTickets().get(0).getShowtime().getShowroom().getName()+"\n" +
-                "Twoje Bilety: \n";
+        String emailContent = String.format("Dzień Dobry, %s %s\n" +
+                        "Dziękujemy za skorzystanie z usług serwisu internetowego Kinopol. \n" +
+                        "Poniżej przesyłamy podsumowanie Twojej transakcji zakupu biletów. \n" +
+                        "Numer zamówienia: %d\n" +
+                        "Film: %s\n" +
+                        "Data: %s\n" +
+                        "Sala: %s\n" +
+                        "Twoje Bilety: \n",
+                order.getClient().getName(),
+                order.getClient().getSurname(),
+                order.getId(),
+                order.getTickets().get(0).getShowtime().getMovie().getTitle(),
+                order.getTickets().get(0).getShowtime().getDate().format(formatter),
+                order.getTickets().get(0).getShowtime().getShowroom().getName());
+
+        stringBuilder.append(emailContent);
 
         for (Ticket ticket: order.getTickets()
              ) {
-            emailContent = emailContent + "Numer biletu: "+ticket.getId()+"\t Miejsce: " + ticket.getSeatPosition()+" \t" +
-                    " Typ biletu: "+ticket.getTicketType().getName()+" \n";
-            
+            stringBuilder.append("Numer biletu: ").append(ticket.getId()).
+                    append("\t Miejsce: ").append(ticket.getSeatPosition()).append(" \t").
+                    append(" Typ biletu: ").append(ticket.getTicketType().getName()).append(" \n");
         }
 
-        emailContent = emailContent + "Niniejsza wiadomość jest potwierdzeniem wpływu środków za dokonany zakup. \n" +
-                "Niniejsza wiadomość jest generowana automatycznie i nie należy na nią odpowiadać.";
+        stringBuilder.append("Niniejsza wiadomość jest potwierdzeniem wpływu środków za dokonany zakup. \n" +
+                "Niniejsza wiadomość jest generowana automatycznie i nie należy na nią odpowiadać.");
 
-        msg.setText(emailContent);
+        msg.setText(stringBuilder.toString());
         javaMailSender.send(msg);
     }
 }
