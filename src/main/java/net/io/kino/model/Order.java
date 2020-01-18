@@ -25,6 +25,7 @@ public class Order implements Comparable<Order> {
     @Enumerated(EnumType.STRING)
     private OrderState state;
     private LocalDateTime date;
+    private String transactionId;
 
 
     public Order() {
@@ -82,6 +83,14 @@ public class Order implements Comparable<Order> {
 
     public void setState(OrderState state) {
         this.state = state;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     @Override

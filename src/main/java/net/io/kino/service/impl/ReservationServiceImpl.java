@@ -39,26 +39,22 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
 
     @Override
     public boolean verifyOrder(Order order) {
-        OrdersGetRequest request = new OrdersGetRequest(String.valueOf(order.getId()));
+        OrdersGetRequest request = new OrdersGetRequest(String.valueOf(order.getTransactionId()));
         HttpResponse<com.paypal.orders.Order> response = null;
         try {
             response = client().execute(request);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        if(response.result() != null && response.result().status().equals("COMPLETED"))
-        {
-            confirmOrder(order);
-            return true;
-
-        }
-        else
-        {
-            cancelOrder(order);
             return false;
         }
 
+        if (response != null && response.result().status().equals("COMPLETED")) {
+            confirmOrder(order);
+            return true;
+        } else {
+            cancelOrder(order);
+            return false;
+        }
     }
 
 
@@ -117,7 +113,7 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
     public List<Order> getOrdersBetweenDates(LocalDate fromDate, LocalDate toDate) {
         LocalDateTime from = fromDate.atStartOfDay();
         LocalDateTime to = toDate.atTime(23, 59, 59);
-        return orders.findOrdersByDateBetween(from,to);
+        return orders.findOrdersByDateBetween(from, to);
     }
 
     @Override
