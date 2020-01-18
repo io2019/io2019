@@ -3,7 +3,6 @@ package net.io.kino.service.impl;
 import net.io.kino.repository.ManagersRepository;
 import net.io.kino.model.Manager;
 import net.io.kino.service.AuthenticationManager;
-import net.io.kino.security.SecurityConfiguration;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +15,6 @@ import java.security.spec.InvalidKeySpecException;
 
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
-    SecurityConfiguration sc = new SecurityConfiguration();
     private static final int iterations = 20*1000;
     private static final int saltLen = 32;
     private static final int desiredKeyLen = 256;
