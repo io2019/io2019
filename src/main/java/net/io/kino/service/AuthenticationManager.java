@@ -1,6 +1,8 @@
 package net.io.kino.service;
 
+import org.springframework.security.core.Authentication;
+
 public interface AuthenticationManager {
-    boolean login(String username, String password);
+    Authentication login(String username, String password);
     boolean authenticate(String username, String password);
 }
