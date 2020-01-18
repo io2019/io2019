@@ -5,6 +5,7 @@ import net.io.kino.model.Manager;
 import net.io.kino.service.AuthenticationManager;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -13,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
+@Service
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
     private static final int iterations = 20*1000;

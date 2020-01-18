@@ -1,11 +1,14 @@
 package net.io.kino.model;
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "managers")
+@Proxy(lazy = false)
 public class Manager {
 
     @Id
