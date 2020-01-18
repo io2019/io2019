@@ -5,8 +5,6 @@ import net.io.kino.model.Manager;
 import net.io.kino.service.AuthenticationManager;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -14,7 +12,6 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
@@ -26,13 +23,8 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     private ManagersRepository managers;
 
     @Override
-    public Authentication login(String username, String password) {
-        if (authenticate(username, password)) {
-            return new UsernamePasswordAuthenticationToken(
-                    username, password, new ArrayList<>());
-        } else {
-            return null;
-        }
+    public boolean login(String username, String password) {
+        return authenticate(username, password);
     }
 
 
