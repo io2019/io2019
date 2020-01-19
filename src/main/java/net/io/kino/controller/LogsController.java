@@ -20,17 +20,17 @@ public class LogsController {
     @GetMapping
     public List<EventData> getAllExistingLogs() { return logRepository.findAll(); }
 
-    @GetMapping
+    @GetMapping(params = {"date"})
     public List<EventData> getLogsByDate(@RequestParam LocalDateTime date) {
         return logRepository.getLogByEventDateAfter(date);
     }
 
-    @GetMapping
+    @GetMapping(params = {"after", "before"})
     public List<EventData> getLogsByPeriod(@RequestParam LocalDateTime after, @RequestParam LocalDateTime before) {
         return logRepository.getLogByEventDateBetween(after, before);
     }
 
-    @GetMapping
+    @GetMapping(params = {"eventType"})
     public List<EventData> getLogsByEventType(@RequestParam EventType eventType) {
         return logRepository.getLogByEventType(eventType);
     }
