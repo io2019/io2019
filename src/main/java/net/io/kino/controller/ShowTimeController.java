@@ -29,9 +29,10 @@ public class ShowTimeController {
     public Showtime addShowTime(@RequestBody ShowtimeRequest showtimeRequest) {
         Showtime showtime = new Showtime();
         showtime.setDate(showtimeRequest.getDate());
-        showtime.setMovie(null);
-        showtime.setShowroom(null);
+        showtime.setMovie(showtimeRequest.getMovie());
+        showtime.setShowroom(showtimeRequest.getShowroom());
         //TODO: Get movies and showrooms from service
+        //TODO: Setter and getter for startHour, finishHour..
         //showtimeService. ups tu nic nie ma xD
         return showtime;
     }
