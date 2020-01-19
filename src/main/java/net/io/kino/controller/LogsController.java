@@ -1,4 +1,4 @@
-package net.io.kino.controller.dto;
+package net.io.kino.controller;
 
 import net.io.kino.model.loggingaction.EventData;
 import net.io.kino.model.loggingaction.EventType;
