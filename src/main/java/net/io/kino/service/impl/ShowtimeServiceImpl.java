@@ -43,4 +43,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
         return showtimeRepository.findShowtimesByMovie(movie);
     }
 
+    @Override
+    public List<Showtime> getAllShowtimes() { return showtimeRepository.findAll(); }
+
 }

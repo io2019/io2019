@@ -2,31 +2,24 @@ package net.io.kino.controller;
 
 import net.io.kino.controller.dto.ShowroomRequest;
 import net.io.kino.model.Showroom;
-import net.io.kino.repository.LogRepository;
-import net.io.kino.repository.ShowroomRepository;
 import net.io.kino.service.ShowroomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/showrooms")
 public class ShowRoomController {
 
-    @Autowired
-    ShowroomRepository showroomRepository;
     ShowroomService showroomService;
 
     @GetMapping
-    public List<Showroom> getShowRooms() { return showroomRepository.findAll(); }
+    public List<Showroom> getShowRooms() { return showroomService.getShowrooms(); }
 
     @GetMapping("/{id}")
-    public Showroom getShowRoom(@PathVariable Long id) { return showroomRepository.findShowroomById(id); }
+    public Showroom getShowRoom(@PathVariable Long id) { return showroomService.getShowroomById(id); }
 
     @GetMapping("/{name}")
-    public Showroom getShowRoom(@PathVariable String name) { return showroomRepository.findShowroomByName(name); }
+    public Showroom getShowRoom(@PathVariable String name) { return showroomService.getShowroomByName(name); }
 
     @PostMapping
     public Showroom addShowRoom(@RequestBody ShowroomRequest showroomRequest) {

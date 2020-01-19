@@ -11,6 +11,7 @@ public interface ShowtimeService {
     Showtime createShowtime(Showtime showtime);
     void updateShowtime(Showtime showtime);
     Showtime getShowtimeById(long id);
+    List<Showtime> getAllShowtimes();
     List<Showtime> getShowtimesByShowroom(Showroom showroom);
     List<Showtime> getShowtimesByMovie(Movie movie);
 }

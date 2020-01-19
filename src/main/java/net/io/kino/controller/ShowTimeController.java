@@ -20,13 +20,11 @@ import java.util.List;
 @RequestMapping("/showtimes")
 public class ShowTimeController {
 
-    @Autowired
-    ShowtimeRepository showtimeRepository;
     ShowtimeService showtimeService;
 
     @GetMapping
     public List<Showtime> getShowTimes() {
-        return showtimeRepository.findAll();
+        return showtimeService.getAllShowtimes();
     }
 
     @GetMapping(params = {"startDate", "endDate", "showroomId"})
@@ -36,7 +34,7 @@ public class ShowTimeController {
 
     @GetMapping("/{id}")
     public Showtime getShowTimeById(@PathVariable Long id) {
-        return showtimeRepository.findShowtimeById(id);
+        return showtimeService.getShowtimeById(id);
     }
 
     @PostMapping
