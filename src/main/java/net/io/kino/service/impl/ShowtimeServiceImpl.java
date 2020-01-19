@@ -35,6 +35,11 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     }
 
     @Override
+    public List<Showtime> getAllShowtimes() {
+        return showtimeRepository.findAll();
+    }
+
+    @Override
     public List<Showtime> getShowtimesByShowroom(Showroom showroom) {
         return showtimeRepository.findShowtimesByShowroom(showroom);
     }
