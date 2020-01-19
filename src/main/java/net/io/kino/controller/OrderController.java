@@ -43,7 +43,7 @@ public class OrderController {
         return order.get();
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Order> getOrders(@RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
         return reservationService.getOrders();
     }

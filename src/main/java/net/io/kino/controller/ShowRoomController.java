@@ -12,7 +12,7 @@ import java.util.List;
 public class ShowRoomController {
 
     // dummy methods because showrooms, tickets and showtimes modules are not ready yet
-    @GetMapping("/")
+    @GetMapping
     public List<Showroom> getShowRooms() { return new ArrayList<>(); }
 
     @GetMapping("/{id}")

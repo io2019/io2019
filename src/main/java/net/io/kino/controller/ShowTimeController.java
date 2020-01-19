@@ -15,7 +15,7 @@ public class ShowTimeController {
 
     ShowtimeService showtimeService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Showtime> getShowTimes(@RequestParam LocalDate day) {
         return new ArrayList<>();
     }
@@ -32,7 +32,6 @@ public class ShowTimeController {
         showtime.setMovie(showtimeRequest.getMovie());
         showtime.setShowroom(showtimeRequest.getShowroom());
         //TODO: Get movies and showrooms from service
-        //TODO: Setter and getter for startHour, finishHour..
         //showtimeService. ups tu nic nie ma xD
         return showtime;
     }
