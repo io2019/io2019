@@ -93,6 +93,15 @@ public class Order implements Comparable<Order> {
         this.transactionId = transactionId;
     }
 
+    public double getOrderValue()
+    {
+        double orderValue = 0;
+        for (Ticket t : this.getTickets()) {
+            orderValue += t.getTicketType().getPrice();
+        }
+        return  orderValue;
+    }
+
     @Override
     public int compareTo(Order order) {
         return Long.compare(getId(), order.getId());

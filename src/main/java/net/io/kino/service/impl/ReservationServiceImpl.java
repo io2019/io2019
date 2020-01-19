@@ -2,9 +2,9 @@ package net.io.kino.service.impl;
 
 import com.braintreepayments.http.HttpResponse;
 import com.braintreepayments.http.serializer.Json;
-import com.paypal.orders.OrdersGetRequest;
-import com.paypal.orders.PurchaseUnit;
+import com.paypal.orders.*;
 import net.io.kino.model.*;
+import net.io.kino.model.Order;
 import net.io.kino.repository.OrdersRepository;
 import net.io.kino.repository.TicketTypesRepository;
 import net.io.kino.service.EmailSender;
@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,38 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
     }
 
     @Override
+    public HttpResponse<com.paypal.orders.Order> createTransaction(Order order) {
+        OrdersCreateRequest request = new OrdersCreateRequest();
+        request.prefer("return=representation");
+        request.requestBody(buildRequestBody(order));
+        HttpResponse<com.paypal.orders.Order> response = null;
+        try {
+            response = client().execute(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert response != null;
+        order.setTransactionId(response.result().id());
+        return response;
+    }
+
+    private OrderRequest buildRequestBody(Order order) {
+        OrderRequest orderRequest = new OrderRequest();
+        orderRequest.intent("CAPTURE");
+
+        ApplicationContext applicationContext = new ApplicationContext().brandName("Kinopol").shippingPreference("NO_SHIPPING");
+        orderRequest.applicationContext(applicationContext);
+
+        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<PurchaseUnitRequest>();
+        PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
+                .description("Zakup biletów")
+                .amount(new AmountWithBreakdown().currencyCode("PLN").value(String.valueOf(order.getOrderValue())));
+        purchaseUnitRequests.add(purchaseUnitRequest);
+        orderRequest.purchaseUnits(purchaseUnitRequests);
+        return orderRequest;
+    }
+
+    @Override
     public boolean verifyOrder(Order order) {
         OrdersGetRequest request = new OrdersGetRequest(String.valueOf(order.getTransactionId()));
         HttpResponse<com.paypal.orders.Order> response = null;
@@ -49,16 +82,7 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
             return false;
         }
 
-        double paid = 0;
-        for (PurchaseUnit pu : response.result().purchaseUnits()) {
-            paid += Double.parseDouble(pu.amount().value());
-        }
-        double orderValue = 0;
-        for (Ticket t : order.getTickets()) {
-            orderValue += t.getTicketType().getPrice();
-        }
-
-        if (response.result().status().equals("COMPLETED") && paid == orderValue) {
+        if (response.result().status().equals("COMPLETED")) {
             confirmOrder(order);
             return true;
         } else {
