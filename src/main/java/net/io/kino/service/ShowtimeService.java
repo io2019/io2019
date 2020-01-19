@@ -1,5 +1,7 @@
 package net.io.kino.service;
 
-public interface ShowtimeService {
+import net.io.kino.model.Showtime;
 
+public interface ShowtimeService {
+    Showtime findShowtimeById(long id);
 }

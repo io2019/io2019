@@ -20,6 +20,7 @@ dependencies {
     implementation 'org.springframework.security:spring-security-web'
     implementation 'org.springframework.security:spring-security-config'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+    implementation 'com.paypal.sdk:checkout-sdk:1.0.0'
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -28,7 +29,9 @@ dependencies {
 
     implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
 }
+
 
 test {
     useJUnitPlatform()
