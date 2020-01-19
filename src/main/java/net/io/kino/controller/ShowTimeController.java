@@ -16,17 +16,17 @@ public class ShowTimeController {
     ShowtimeService showtimeService;
 
     @GetMapping("/")
-    public List<Showtime> getShowtimes(@RequestParam LocalDate day) {
+    public List<Showtime> getShowTimes(@RequestParam LocalDate day) {
         return new ArrayList<>();
     }
 
     @GetMapping("/{id}")
-    public Showtime getShowtime(@PathVariable Long id) {
+    public Showtime getShowTime(@PathVariable Long id) {
         return new Showtime();
     }
 
     @PostMapping("/")
-    public Showtime addShowtime(@RequestBody ShowtimeRequest showtimeRequest) {
+    public Showtime addShowTime(@RequestBody ShowtimeRequest showtimeRequest) {
         Showtime showtime = new Showtime();
         showtime.setDate(showtimeRequest.getDate());
         showtime.setMovie(null);
