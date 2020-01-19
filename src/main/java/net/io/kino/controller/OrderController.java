@@ -25,7 +25,7 @@ public class OrderController {
     @PostMapping
     public Order addOrder(@RequestBody OrderRequest orderRequest) {
         return reservationService.createOrder(orderRequest.getTickets()
-                .stream().map(t -> t.convertToTicket(showtimeService.findShowtimeById(t.getShowtimeId())))
+                .stream().map(t -> t.convertToTicket(showtimeService.getShowtimeById(t.getShowtimeId())))
                 .collect(Collectors.toList()), orderRequest.getClient());
     }
 
