@@ -14,4 +14,6 @@ public interface ShowtimeService {
     List<Showtime> getAllShowtimes();
     List<Showtime> getShowtimesByShowroom(Showroom showroom);
     List<Showtime> getShowtimesByMovie(Movie movie);
+    List<Showtime> getShowtimesByDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+    List<Showtime> getShowtimesByDateInShowroomBetween(LocalDateTime startDate, LocalDateTime endDate, long showroomId);
 }

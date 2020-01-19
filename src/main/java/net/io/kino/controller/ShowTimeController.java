@@ -28,8 +28,8 @@ public class ShowTimeController {
     }
 
     @GetMapping(params = {"startDate", "endDate", "showroomId"})
-    public List<Showtime> getShowTimesByDate(@RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate, @RequestParam Long showroomId) {
-        return showtimeRepository.findShowtimesByDateBetween(startDate, endDate, showroomId);
+    public List<Showtime> getShowTimesByDate(@RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate) {
+        return showtimeService.getShowtimesByDateBetween(startDate, endDate);
     }
 
     @GetMapping("/{id}")
