@@ -1,6 +1,5 @@
 package net.io.kino.service;
 
-import com.braintreepayments.http.HttpResponse;
 import net.io.kino.model.Order;
 import net.io.kino.model.PersonalDetails;
 import net.io.kino.model.Ticket;
@@ -12,8 +11,6 @@ import java.util.Optional;
 
 public interface ReservationService {
     Order createOrder(List<Ticket> tickets, PersonalDetails client);
-
-    HttpResponse<com.paypal.orders.Order> createTransaction(Order order);
 
     boolean verifyOrder(Order order);
 

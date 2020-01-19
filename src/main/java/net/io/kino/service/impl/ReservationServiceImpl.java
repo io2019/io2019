@@ -1,7 +1,6 @@
 package net.io.kino.service.impl;
 
 import com.braintreepayments.http.HttpResponse;
-import com.braintreepayments.http.serializer.Json;
 import com.paypal.orders.*;
 import net.io.kino.model.*;
 import net.io.kino.model.Order;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,11 +34,11 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
     @Override
     public Order createOrder(List<Ticket> tickets, PersonalDetails client) {
         Order order = new Order(tickets, client, OrderState.inProgress, LocalDateTime.now());
+        order.setTransactionId(createTransaction(order).result().id());
         return orders.save(order);
     }
 
-    @Override
-    public HttpResponse<com.paypal.orders.Order> createTransaction(Order order) {
+    private HttpResponse<com.paypal.orders.Order> createTransaction(Order order) {
         OrdersCreateRequest request = new OrdersCreateRequest();
         request.prefer("return=representation");
         request.requestBody(buildRequestBody(order));
@@ -50,8 +48,6 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assert response != null;
-        order.setTransactionId(response.result().id());
         return response;
     }
 
