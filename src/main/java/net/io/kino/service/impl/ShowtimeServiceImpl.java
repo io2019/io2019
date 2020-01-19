@@ -7,6 +7,7 @@ import net.io.kino.repository.ShowtimeRepository;
 import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ShowtimeServiceImpl implements ShowtimeService {
@@ -16,7 +17,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
 
     @Override
     public Showtime createShowtime(Showtime showtime) {
-        if (showtimeRepository.findShowtimesByDateBetween(showtime.getDate(), showtime.getFinishHour(), showtime.getShowroom().getId()).size() != 0) {
+        if (showtimeRepository.findShowtimesByDateInShowroomBetween(showtime.getDate(), showtime.getFinishHour(), showtime.getShowroom().getId()).size() != 0) {
             throw new IllegalArgumentException("This showtime overlaps with another showtime.");
         }
 
@@ -41,6 +42,16 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     @Override
     public List<Showtime> getShowtimesByMovie(Movie movie) {
         return showtimeRepository.findShowtimesByMovie(movie);
+    }
+
+    @Override
+    public List<Showtime> getShowtimesByDateBetween(LocalDateTime startDate, LocalDateTime endDate) {
+        return showtimeRepository.findShowtimesByDateBetween(startDate, endDate);
+    }
+
+    @Override
+    public List<Showtime> getShowtimesByDateInShowroomBetween(LocalDateTime startDate, LocalDateTime endDate, long showroomId) {
+        return showtimeRepository.findShowtimesByDateInShowroomBetween(startDate, endDate, showroomId);
     }
 
 }
