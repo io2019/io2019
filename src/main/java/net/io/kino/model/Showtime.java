@@ -5,11 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "showtimes")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Showtime {
 
@@ -28,7 +27,7 @@ public class Showtime {
 
     public Showtime() {}
 
-    public Showtime(Movie movie, Showroom showroom, LocalDateTime date, Time startHour, Time finishHour) {
+    public Showtime(Movie movie, Showroom showroom, LocalDateTime date) {
         this.movie = movie;
         this.showroom = showroom;
         this.date = date;

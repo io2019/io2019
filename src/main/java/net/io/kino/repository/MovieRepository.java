@@ -2,13 +2,14 @@ package net.io.kino.repository;
 
 import net.io.kino.model.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    List<Movie> getMovieById(Long id);
-    List<Movie> getMoviesByDirector(String director);
-    List<Movie> getMovieByTitle(String title);
-
+    Movie findMovieById(Long id);
+    List<Movie> findMovieByTitle(String title);
+    List<Movie> findAll();
 }

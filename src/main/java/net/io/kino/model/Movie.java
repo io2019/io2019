@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.Duration;
 
 @Entity
+@Table(name = "movies")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie {
 
@@ -16,12 +17,15 @@ public class Movie {
 
     @Enumerated(EnumType.STRING)
     private MovieCategory category;
-
     private String title;
     private Duration duration;
     private String description;
     private String director;
     private Integer ageRestriction;
+
+    public Movie() {
+
+    }
 
     public Movie(String title, Duration duration, String description, String director,
                  Integer ageRestriction, MovieCategory category) {
