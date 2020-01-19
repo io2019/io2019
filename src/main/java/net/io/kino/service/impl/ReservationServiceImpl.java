@@ -3,6 +3,7 @@ package net.io.kino.service.impl;
 import com.braintreepayments.http.HttpResponse;
 import com.braintreepayments.http.serializer.Json;
 import com.paypal.orders.OrdersGetRequest;
+import com.paypal.orders.PurchaseUnit;
 import net.io.kino.model.*;
 import net.io.kino.repository.OrdersRepository;
 import net.io.kino.repository.TicketTypesRepository;
@@ -48,13 +49,24 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
             return false;
         }
 
-        if (response != null && response.result().status().equals("COMPLETED")) {
+        double paid = 0;
+        for (PurchaseUnit pu :response.result().purchaseUnits()) {
+            paid += Double.parseDouble(pu.amount().value());
+        }
+        double orderValue = 0 ;
+        for (Ticket t:order.getTickets()) {
+            orderValue+=t.getTicketType().getPrice();
+        }
+
+        if (response.result().status().equals("COMPLETED") && paid == orderValue ) {
             confirmOrder(order);
             return true;
         } else {
             cancelOrder(order);
             return false;
         }
+
+
     }
 
 
