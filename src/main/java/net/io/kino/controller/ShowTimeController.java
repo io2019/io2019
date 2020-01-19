@@ -29,7 +29,7 @@ public class ShowTimeController {
         return showtimeRepository.findAll();
     }
 
-    @GetMapping
+    @GetMapping(params = {"startDate", "endDate", "showroomId"})
     public List<Showtime> getShowTimesByDate(@RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate, @RequestParam Long showroomId) {
         return showtimeRepository.findShowtimesByDateBetween(startDate, endDate, showroomId);
     }
