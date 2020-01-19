@@ -2,6 +2,10 @@ package net.io.kino.controller;
 
 import net.io.kino.controller.dto.ShowroomRequest;
 import net.io.kino.model.Showroom;
+import net.io.kino.repository.LogRepository;
+import net.io.kino.repository.ShowroomRepository;
+import net.io.kino.service.ShowroomService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,21 +15,26 @@ import java.util.List;
 @RequestMapping("/showrooms")
 public class ShowRoomController {
 
-    // dummy methods because showrooms, tickets and showtimes modules are not ready yet
+    @Autowired
+    ShowroomRepository showroomRepository;
+    ShowroomService showroomService;
+
     @GetMapping
-    public List<Showroom> getShowRooms() { return new ArrayList<>(); }
+    public List<Showroom> getShowRooms() { return showroomRepository.findAll(); }
 
     @GetMapping("/{id}")
-    public Showroom getShowRoom(@PathVariable Long id) { return new Showroom(); }
+    public Showroom getShowRoom(@PathVariable Long id) { return showroomRepository.findShowroomById(id); }
 
-    @PostMapping("/")
+    @GetMapping("/{name}")
+    public Showroom getShowRoom(@PathVariable String name) { return showroomRepository.findShowroomByName(name); }
+
+    @PostMapping
     public Showroom addShowRoom(@RequestBody ShowroomRequest showroomRequest) {
         Showroom showroom = new Showroom();
         showroom.setName(showroomRequest.getName());
-        // no methods...
-        //showroom.setNoOfColumns(showroomRequest.getNoOfColumns());
-        //showroom.setNoOfRows(showroomRequest.getNoOfRows());
-
+        showroom.setNoOfColumns(showroomRequest.getNoOfColumns());
+        showroom.setNoOfRows(showroomRequest.getNoOfRows());
+        showroomService.createShowroom(showroom);
         return showroom;
         }
     }
