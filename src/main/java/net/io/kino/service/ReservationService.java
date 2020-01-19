@@ -24,9 +24,9 @@ public interface ReservationService {
 
     boolean deactivateTicketType(long id);
 
-    Optional<Order> findOrderById(long id);
+    Optional<Order> getOrderById(long id);
 
-    Optional<TicketType> findTicketTypeById(long id);
+    Optional<TicketType> getTicketTypeById(long id);
 
     List<TicketType> getTicketTypes();
 

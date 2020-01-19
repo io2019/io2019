@@ -125,12 +125,12 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
     }
 
     @Override
-    public Optional<Order> findOrderById(long id) {
+    public Optional<Order> getOrderById(long id) {
         return orders.findById(id);
     }
 
     @Override
-    public Optional<TicketType> findTicketTypeById(long id) {
+    public Optional<TicketType> getTicketTypeById(long id) {
         return ticketTypes.findById(id);
     }
 
