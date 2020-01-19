@@ -34,16 +34,6 @@ public class ShowTimeController {
         return showtimeRepository.findShowtimesByDateBetween(startDate, endDate, showroomId);
     }
 
-    @GetMapping("/{showroom}")
-    public List<Showtime> getShowTimesByRoom(@PathVariable Showroom showroom) {
-        return showtimeRepository.findShowtimesByShowroom(showroom);
-    }
-
-    @GetMapping("/{movie}")
-    public List<Showtime> getShowTimesByMovie(@PathVariable Movie movie) {
-        return showtimeRepository.findShowtimesByMovie(movie);
-    }
-
     @GetMapping("/{id}")
     public Showtime getShowTimeById(@PathVariable Long id) {
         return showtimeRepository.findShowtimeById(id);
