@@ -1,4 +1,5 @@
 package net.io.kino.controller.dto;
+
 import net.io.kino.model.Showtime;
 import net.io.kino.model.Ticket;
 import net.io.kino.model.TicketType;
@@ -37,6 +38,6 @@ public class TicketRequest {
         t.setTicketType(ticketType);
         t.setSeatPosition(seatPosition);
         t.setShowtime(showtime);
-        return  t;
+        return t;
     }
 }

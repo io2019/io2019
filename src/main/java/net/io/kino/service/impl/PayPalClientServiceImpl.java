@@ -10,6 +10,7 @@ public class PayPalClientServiceImpl {
             "EI1xE6hmO_F9mcnJyBNPWP1kboHfLXxzg9ZgTq-4cRkf2anhGGbRA8VN2paFFsi8rr5SGCdi9jvGPy8i");
 
     PayPalHttpClient client = new PayPalHttpClient(environment);
+
     public PayPalHttpClient client() {
         return this.client;
     }

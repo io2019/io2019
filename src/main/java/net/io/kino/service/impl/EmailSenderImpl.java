@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
 import java.time.format.DateTimeFormatter;
 
 @Service
@@ -41,8 +42,8 @@ public class EmailSenderImpl implements EmailSender {
 
         stringBuilder.append(emailContent);
 
-        for (Ticket ticket: order.getTickets()
-             ) {
+        for (Ticket ticket : order.getTickets()
+        ) {
             stringBuilder.append("Numer biletu: ").append(ticket.getId()).
                     append("\t Miejsce: ").append(ticket.getSeatPosition()).append(" \t").
                     append(" Typ biletu: ").append(ticket.getTicketType().getName()).append(" \n");

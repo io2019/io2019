@@ -50,23 +50,21 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
         }
 
         double paid = 0;
-        for (PurchaseUnit pu :response.result().purchaseUnits()) {
+        for (PurchaseUnit pu : response.result().purchaseUnits()) {
             paid += Double.parseDouble(pu.amount().value());
         }
-        double orderValue = 0 ;
-        for (Ticket t:order.getTickets()) {
-            orderValue+=t.getTicketType().getPrice();
+        double orderValue = 0;
+        for (Ticket t : order.getTickets()) {
+            orderValue += t.getTicketType().getPrice();
         }
 
-        if (response.result().status().equals("COMPLETED") && paid == orderValue ) {
+        if (response.result().status().equals("COMPLETED") && paid == orderValue) {
             confirmOrder(order);
             return true;
         } else {
             cancelOrder(order);
             return false;
         }
-
-
     }
 
 
