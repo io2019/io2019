@@ -47,10 +47,7 @@ public class ShowTimeController {
     @GetMapping("/{id}")
     public ShowtimeResponse getShowTimeById(@PathVariable Long id) {
         return ShowtimeResponse.of(showtimeService.getShowtimeById(id),
-                reservationService.getOrdersWithShowtime(id).stream()
-                        .flatMap(order -> order.getTickets().stream())
-                        .filter(ticket -> ticket.getShowtime().getId().equals(id))
-                        .collect(Collectors.toList()));
+                reservationService.getTicketsByShowtime(id));
     }
 
     @PostMapping

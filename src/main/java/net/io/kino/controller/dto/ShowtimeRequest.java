@@ -1,7 +1,5 @@
 package net.io.kino.controller.dto;
 
-import net.io.kino.model.Showtime;
-
 import java.time.LocalDateTime;
 
 public class ShowtimeRequest {

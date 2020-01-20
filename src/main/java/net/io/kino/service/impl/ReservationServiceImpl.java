@@ -5,6 +5,7 @@ import com.paypal.orders.*;
 import net.io.kino.model.*;
 import net.io.kino.model.Order;
 import net.io.kino.repository.OrdersRepository;
+import net.io.kino.repository.TicketRepository;
 import net.io.kino.repository.TicketTypesRepository;
 import net.io.kino.service.EmailSender;
 import net.io.kino.service.ReservationService;
@@ -28,6 +29,9 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
 
     @Autowired
     private TicketTypesRepository ticketTypes;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     @Autowired
     private EmailSender emailSender;
@@ -153,9 +157,7 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
     }
 
     @Override
-    public List<Order> getOrdersWithShowtime(long showtimeId) {
-        return orders.findAll().stream().filter(order -> order.getTickets().stream()
-                .anyMatch(ticket -> ticket.getShowtime().getId()==showtimeId))
-                .collect(Collectors.toList());
+    public List<Ticket> getTicketsByShowtime(long showtimeId) {
+        return ticketRepository.getTicketsByShowtimeId(showtimeId);
     }
 }
