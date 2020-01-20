@@ -18,10 +18,11 @@ public class ShowroomServiceImpl implements ShowroomService {
     public Showroom createShowroom(Showroom showroom) { return showrooms.save(showroom); }
 
     @Override
-    public void updateShowroomById(long id, String name){
-        Showroom showroom = getShowroomById(id);
-        if (name != null) {
-            showroom.setName(name);
+    public void updateShowroom(Showroom showroom) {
+        if(showrooms.findShowroomById(showroom.getId()) == null) {
+            throw new IllegalArgumentException();
+        } else {
+            showrooms.save(showroom);
         }
     }
 

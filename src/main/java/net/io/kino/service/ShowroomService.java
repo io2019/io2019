@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ShowroomService {
     Showroom createShowroom(Showroom showroom);
-    void updateShowroomById(long id, String name);
+    void updateShowroom(Showroom showroom);
     Showroom getShowroomById(long id);
     Showroom getShowroomByName(String name);
     List<Showroom> getShowrooms();

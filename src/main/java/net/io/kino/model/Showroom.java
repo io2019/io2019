@@ -36,10 +36,6 @@ public class Showroom {
         this.name = name;
     }
 
-    public Integer getNumberOfSeats(){
-        return this.noOfRows*this.noOfColumns;
-    }
-
     public void setNoOfRows (Integer nr) {
         this.noOfRows = nr;
     }
