@@ -92,7 +92,7 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
     @Override
     public boolean confirmOrder(Order order) {
         order.setState(OrderState.paid);
-        emailSender.sendEmail(order);
+//        emailSender.sendEmail(order);
         return orders.save(order) != null;
     }
 
