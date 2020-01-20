@@ -5,7 +5,6 @@ import net.io.kino.model.Showroom;
 import net.io.kino.model.Showtime;
 import net.io.kino.repository.ShowtimeRepository;
 import net.io.kino.service.ShowtimeService;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

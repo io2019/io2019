@@ -2,10 +2,7 @@ package net.io.kino.controller;
 
 import net.io.kino.model.loggingaction.EventData;
 import net.io.kino.model.loggingaction.EventType;
-import net.io.kino.repository.LogRepository;
-import net.io.kino.service.impl.logger.DatabaseLoggingOperationsImpl;
 import net.io.kino.service.logger.LoggingOperations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

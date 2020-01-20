@@ -60,7 +60,7 @@ public class OrderController {
     @GetMapping(params = {"fromDate", "toDate"})
     @PreAuthorize("isAuthenticated()")
     public List<Order> getOrders(@RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
-        return reservationService.getOrders();
+        return reservationService.getOrdersBetweenDates(fromDate, toDate);
     }
 
     @PatchMapping("/{orderId}")

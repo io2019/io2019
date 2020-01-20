@@ -63,7 +63,7 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
         ApplicationContext applicationContext = new ApplicationContext().brandName("Kinopol").shippingPreference("NO_SHIPPING");
         orderRequest.applicationContext(applicationContext);
 
-        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<PurchaseUnitRequest>();
+        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<>();
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
                 .description("Zakup biletów")
                 .amount(new AmountWithBreakdown().currencyCode("PLN").value(String.valueOf(order.getOrderValue())));
