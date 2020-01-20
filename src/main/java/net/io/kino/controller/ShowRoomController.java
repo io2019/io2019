@@ -25,8 +25,8 @@ public class ShowRoomController {
     @GetMapping("/{id}")
     public Showroom getShowRoom(@PathVariable Long id) { return showroomRepository.findShowroomById(id); }
 
-    @GetMapping("/{name}")
-    public Showroom getShowRoom(@PathVariable String name) { return showroomRepository.findShowroomByName(name); }
+    @GetMapping(params = "name")
+    public Showroom getShowRoom(@RequestParam String name) { return showroomRepository.findShowroomByName(name); }
 
     @PostMapping
     public Showroom addShowRoom(@RequestBody ShowroomRequest showroomRequest) {
