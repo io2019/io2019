@@ -41,7 +41,7 @@ public class ShowRoomController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<HttpStatus> updateMove(@PathVariable Long id, @RequestBody Showroom showroom) {
+    public ResponseEntity<HttpStatus> updateShowroom(@PathVariable Long id, @RequestBody Showroom showroom) {
         showroom.setId(id);
         try {
             showroomService.updateShowroom(showroom);
