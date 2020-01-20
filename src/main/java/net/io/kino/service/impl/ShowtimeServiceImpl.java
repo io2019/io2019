@@ -29,7 +29,11 @@ public class ShowtimeServiceImpl implements ShowtimeService {
 
     @Override
     public void updateShowtime(Showtime showtime) {
-        showtimeRepository.save(showtime);
+        if(showtimeRepository.findShowtimeById(showtime.getId()) == null) {
+            throw new IllegalArgumentException();
+        } else {
+            showtimeRepository.save(showtime);
+        }
     }
 
     @Override
