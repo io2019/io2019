@@ -1,11 +1,14 @@
 package net.io.kino.controller;
 
 import net.io.kino.controller.dto.ShowtimeRequest;
+import net.io.kino.model.Showroom;
 import net.io.kino.model.Showtime;
 import net.io.kino.service.MovieService;
 import net.io.kino.service.ShowroomService;
 import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +53,18 @@ public class ShowTimeController {
         showtime.setMovie(movieService.getMovieById(showtimeRequest.getMovieId()));
         showtime.setShowroom(showroomService.getShowroomById(showtimeRequest.getShowroomId()));
         return showtimeService.createShowtime(showtime);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<HttpStatus> updateShowtime(@PathVariable Long id, @RequestBody Showtime showtime) {
+        showtime.setId(id);
+        try {
+            showtimeService.updateShowtime(showtime);
+        } catch(IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
