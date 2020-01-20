@@ -5,6 +5,7 @@ import net.io.kino.model.Showroom;
 import net.io.kino.model.Showtime;
 import net.io.kino.repository.ShowtimeRepository;
 import net.io.kino.service.ShowtimeService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +60,11 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     @Override
     public List<Showtime> getShowtimesByDateInShowroomBetween(LocalDateTime startDate, LocalDateTime endDate, long showroomId) {
         return showtimeRepository.findShowtimesByDateInShowroomBetween(startDate, endDate, showroomId);
+    }
+
+    @Override
+    public List<Showtime> getShowtimesBetweenDates(LocalDateTime startDate, LocalDateTime endDate) {
+        return showtimeRepository.findShowtimesBetweenDates(startDate, endDate);
     }
 
 }

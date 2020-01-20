@@ -17,6 +17,8 @@ public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
     List<Showtime> findShowtimesByShowroom(Showroom showroom);
     List<Showtime> findShowtimesByMovie(Movie movie);
     List<Showtime> findAll();
+
+
     @Query(nativeQuery = true, value = "select st.id, date, movie_id, showroom_id " +
             "from showtimes st " +
             "left join movies m on st.movie_id = m.id " +
@@ -33,6 +35,14 @@ public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
             "where date <= :endDate " +
             "  and DATEADD(MINUTE, duration, date) >= :startDate")
     List<Showtime> findShowtimesByDateBetween(@Param("startDate") LocalDateTime startDate,
+                                              @Param("endDate") LocalDateTime endDate);
+
+    @Query(nativeQuery = true, value = "select st.id, st.date, movie_id, showroom_id " +
+            "from showtimes st " +
+            "left join movies m on st.movie_id = m.id " +
+            "where st.date <= :endDate " +
+            "  and st.date >= :startDate")
+    List<Showtime> findShowtimesBetweenDates(@Param("startDate") LocalDateTime startDate,
                                               @Param("endDate") LocalDateTime endDate);
 
 }

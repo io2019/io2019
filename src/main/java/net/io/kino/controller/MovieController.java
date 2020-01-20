@@ -1,6 +1,5 @@
 package net.io.kino.controller;
 
-import net.io.kino.controller.dto.MovieRequest;
 import net.io.kino.model.Movie;
 import net.io.kino.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +32,8 @@ public class MovieController {
     }
 
     @PostMapping
-    public Movie addMovie(@RequestBody MovieRequest movieRequest) {
-        Movie movie = new Movie();
-        movie.setAgeRestriction(movieRequest.getAgeRestriction());
-        movie.setCategory(movieRequest.getCategory());
-        movie.setDescription(movieRequest.getDescription());
-        movie.setDirector(movieRequest.getDirector());
-        movie.setDuration(movieRequest.getDuration());
-        movie.setTitle(movieRequest.getTitle());
-        movieService.createMovie(movie);
-        return movie;
+    public Movie addMovie(@RequestBody Movie movie) {
+        return movieService.createMovie(movie);
     }
 
 }

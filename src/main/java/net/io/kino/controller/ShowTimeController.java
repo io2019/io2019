@@ -22,9 +22,12 @@ public class ShowTimeController {
         return showtimeService.getAllShowtimes();
     }
 
-    @GetMapping(params = {"startDate", "endDate", "showroomId"})
-    public List<Showtime> getShowTimesByDate(@RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate, @RequestParam Long showroomId) {
-        return showtimeService.getShowtimesByDateInShowroomBetween(startDate, endDate, showroomId);
+    @GetMapping(params = {"startDate", "endDate"})
+    public List<Showtime> getShowTimesByDate(@RequestParam LocalDateTime startDate, @RequestParam LocalDateTime endDate, @RequestParam(value = "showroomId", required = false) Long showroomId) {
+        if(showroomId == null)
+            return showtimeService.getShowtimesBetweenDates(startDate, endDate);
+        else
+            return showtimeService.getShowtimesByDateInShowroomBetween(startDate, endDate, showroomId);
     }
 
     @GetMapping("/{id}")
