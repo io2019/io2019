@@ -7,7 +7,7 @@ import net.io.kino.model.TicketType;
 public class TicketRequest {
     private TicketType ticketType;
     private Integer seatPosition;
-    private long showtimeId;
+    private Long showtimeId;
 
     public TicketType getTicketType() {
         return ticketType;
@@ -25,7 +25,7 @@ public class TicketRequest {
         this.seatPosition = seatPosition;
     }
 
-    public long getShowtimeId() {
+    public Long getShowtimeId() {
         return showtimeId;
     }
 
@@ -33,7 +33,7 @@ public class TicketRequest {
         this.showtimeId = showtimeId;
     }
 
-    public Ticket convertToTicket(Showtime showtime) {
+    public Ticket convertToTicket(Showtime showtime, TicketType ticketType) {
         Ticket t = new Ticket();
         t.setTicketType(ticketType);
         t.setSeatPosition(seatPosition);

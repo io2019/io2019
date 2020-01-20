@@ -34,5 +34,7 @@ public interface ReservationService {
 
     List<Order> getOrders();
 
+    List<Ticket> getTicketsByShowtime(long showtimeId);
+
 
 }

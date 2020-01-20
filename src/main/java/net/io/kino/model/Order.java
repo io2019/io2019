@@ -1,7 +1,6 @@
 package net.io.kino.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,21 +8,20 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order implements Comparable<Order> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @ElementCollection
-    @CollectionTable(
-            name = "TICKET",
-            joinColumns = @JoinColumn(name = "ORDER_ID")
-    )
+    private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ticket> tickets;
+
     @Embedded
     private PersonalDetails client;
+
     @Enumerated(EnumType.STRING)
     private OrderState state;
+
     private LocalDateTime date;
     private String transactionId;
 
@@ -49,7 +47,7 @@ public class Order implements Comparable<Order> {
         this.date = date;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

@@ -17,7 +17,7 @@ public class EventData {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String authUser;
@@ -86,11 +86,11 @@ public class EventData {
                .concat(C.Literal.NEW_LINE);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

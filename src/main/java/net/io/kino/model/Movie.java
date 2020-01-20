@@ -1,24 +1,19 @@
 package net.io.kino.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
-import java.time.Duration;
 
 @Entity
 @Table(name = "movies")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private MovieCategory category;
     private String title;
-    private Duration duration;
+    private long duration;
     private String description;
     private String director;
     private Integer ageRestriction;
@@ -27,7 +22,7 @@ public class Movie {
 
     }
 
-    public Movie(String title, Duration duration, String description, String director,
+    public Movie(String title, long duration, String description, String director,
                  Integer ageRestriction, MovieCategory category) {
         this.title = title;
         this.duration = duration;
@@ -35,6 +30,14 @@ public class Movie {
         this.director = director;
         this.ageRestriction = ageRestriction;
         this.category = category;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public MovieCategory getCategory() {
@@ -57,11 +60,11 @@ public class Movie {
         this.title = title;
     }
 
-    public Duration getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 

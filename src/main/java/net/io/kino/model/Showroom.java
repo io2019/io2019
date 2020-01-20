@@ -1,18 +1,14 @@
 package net.io.kino.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "showrooms")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Showroom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String name;
     private Integer noOfColumns;
@@ -24,9 +20,16 @@ public class Showroom {
         this.noOfRows = numberOfRows;
     }
 
-    public Showroom() {}
+    public Showroom() {
+    }
 
-    public long getId() { return id;}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -36,15 +39,20 @@ public class Showroom {
         this.name = name;
     }
 
-    public Integer getNumberOfSeats(){
-        return this.noOfRows*this.noOfColumns;
-    }
-
     public void setNoOfRows (Integer nr) {
         this.noOfRows = nr;
+    }
+
+    public Integer getNoOfRows() {
+        return noOfRows;
     }
 
     public void setNoOfColumns(Integer nr) {
         this.noOfColumns = nr;
     }
+
+    public Integer getNoOfColumns() {
+        return noOfColumns;
+    }
+
 }

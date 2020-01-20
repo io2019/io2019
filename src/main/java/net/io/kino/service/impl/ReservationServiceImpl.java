@@ -5,6 +5,7 @@ import com.paypal.orders.*;
 import net.io.kino.model.*;
 import net.io.kino.model.Order;
 import net.io.kino.repository.OrdersRepository;
+import net.io.kino.repository.TicketRepository;
 import net.io.kino.repository.TicketTypesRepository;
 import net.io.kino.service.EmailSender;
 import net.io.kino.service.ReservationService;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -27,6 +29,9 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
 
     @Autowired
     private TicketTypesRepository ticketTypes;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     @Autowired
     private EmailSender emailSender;
@@ -58,7 +63,7 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
         ApplicationContext applicationContext = new ApplicationContext().brandName("Kinopol").shippingPreference("NO_SHIPPING");
         orderRequest.applicationContext(applicationContext);
 
-        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<PurchaseUnitRequest>();
+        List<PurchaseUnitRequest> purchaseUnitRequests = new ArrayList<>();
         PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest().referenceId("PUHF")
                 .description("Zakup biletów")
                 .amount(new AmountWithBreakdown().currencyCode("PLN").value(String.valueOf(order.getOrderValue())));
@@ -91,7 +96,7 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
     @Override
     public boolean confirmOrder(Order order) {
         order.setState(OrderState.paid);
-        emailSender.sendEmail(order);
+//        emailSender.sendEmail(order);
         return orders.save(order) != null;
     }
 
@@ -151,4 +156,8 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
         return orders.findAll();
     }
 
+    @Override
+    public List<Ticket> getTicketsByShowtime(long showtimeId) {
+        return ticketRepository.getTicketsByShowtimeId(showtimeId);
+    }
 }
