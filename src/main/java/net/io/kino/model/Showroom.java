@@ -24,9 +24,16 @@ public class Showroom {
         this.noOfRows = numberOfRows;
     }
 
-    public Showroom() {}
+    public Showroom() {
+    }
 
-    public Long getId() { return id;}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -36,15 +43,16 @@ public class Showroom {
         this.name = name;
     }
 
-    public Integer getNumberOfSeats(){
-        return this.noOfRows*this.noOfColumns;
+    public Integer getNumberOfSeats() {
+        return this.noOfRows * this.noOfColumns;
     }
 
-    public void setNoOfRows (Integer nr) {
+    public void setNoOfRows(Integer nr) {
         this.noOfRows = nr;
     }
 
     public void setNoOfColumns(Integer nr) {
         this.noOfColumns = nr;
     }
+
 }

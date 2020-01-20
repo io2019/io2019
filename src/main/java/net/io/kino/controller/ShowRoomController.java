@@ -3,6 +3,8 @@ package net.io.kino.controller;
 import net.io.kino.model.Showroom;
 import net.io.kino.service.ShowroomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,5 +39,18 @@ public class ShowRoomController {
         showroomService.createShowroom(showroom);
         return showroom;
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<HttpStatus> updateMove(@PathVariable Long id, @RequestBody Showroom showroom) {
+        showroom.setId(id);
+        try {
+            showroomService.updateShowroom(showroom);
+        } catch(IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
 
