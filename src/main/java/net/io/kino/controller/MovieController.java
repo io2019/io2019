@@ -12,6 +12,7 @@ import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/movies")
 @PreAuthorize("isAuthenticated()")
 public class MovieController {
