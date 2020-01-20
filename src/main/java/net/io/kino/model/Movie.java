@@ -1,7 +1,6 @@
 package net.io.kino.model;
 
 import javax.persistence.*;
-import java.time.Duration;
 
 @Entity
 @Table(name = "movies")
@@ -14,7 +13,7 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private MovieCategory category;
     private String title;
-    private Duration duration;
+    private long duration;
     private String description;
     private String director;
     private Integer ageRestriction;
@@ -23,7 +22,7 @@ public class Movie {
 
     }
 
-    public Movie(String title, Duration duration, String description, String director,
+    public Movie(String title, long duration, String description, String director,
                  Integer ageRestriction, MovieCategory category) {
         this.title = title;
         this.duration = duration;
@@ -62,11 +61,11 @@ public class Movie {
     }
 
     public long getDuration() {
-        return duration.toMinutes();
+        return duration;
     }
 
     public void setDuration(long duration) {
-        this.duration = Duration.ofMinutes(duration);
+        this.duration = duration;
     }
 
     public String getDescription() {
