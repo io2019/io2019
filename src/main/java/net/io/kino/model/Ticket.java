@@ -9,7 +9,7 @@ public class Ticket {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private long id;
+    private Long id;
 
     @OneToOne
     @JoinColumn
@@ -32,7 +32,7 @@ public class Ticket {
         this.ticketType = ticketType;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -48,7 +48,7 @@ public class Ticket {
         return seatPosition;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

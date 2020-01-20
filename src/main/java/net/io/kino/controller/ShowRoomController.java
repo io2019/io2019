@@ -1,6 +1,5 @@
 package net.io.kino.controller;
 
-import net.io.kino.controller.dto.ShowroomRequest;
 import net.io.kino.model.Showroom;
 import net.io.kino.service.ShowroomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +25,14 @@ public class ShowRoomController {
         return showroomService.getShowroomById(id);
     }
 
-    @GetMapping("/{name}")
-    public Showroom getShowRoom(@PathVariable String name) {
+    @GetMapping(params = "name")
+    public Showroom getShowRoom(@RequestParam String name) {
         return showroomService.getShowroomByName(name);
     }
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public Showroom addShowRoom(@RequestBody ShowroomRequest showroomRequest) {
-        Showroom showroom = new Showroom();
-        showroom.setName(showroomRequest.getName());
-        showroom.setNoOfColumns(showroomRequest.getNoOfColumns());
-        showroom.setNoOfRows(showroomRequest.getNoOfRows());
+    public Showroom addShowRoom(@RequestBody Showroom showroom) {
         showroomService.createShowroom(showroom);
         return showroom;
     }

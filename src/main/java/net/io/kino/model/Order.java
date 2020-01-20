@@ -13,7 +13,7 @@ import java.util.List;
 public class Order implements Comparable<Order> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @ElementCollection
     @CollectionTable(
             name = "TICKET",
@@ -49,7 +49,7 @@ public class Order implements Comparable<Order> {
         this.date = date;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

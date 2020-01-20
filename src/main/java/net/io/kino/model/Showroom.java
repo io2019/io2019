@@ -2,6 +2,7 @@ package net.io.kino.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ public class Showroom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String name;
     private Integer noOfColumns;
@@ -26,7 +27,7 @@ public class Showroom {
 
     public Showroom() {}
 
-    public long getId() { return id;}
+    public Long getId() { return id;}
 
     public String getName() {
         return name;

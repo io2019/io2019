@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class TicketType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String name;
     private double price;
@@ -49,7 +49,7 @@ public class TicketType {
         this.isActive = isActive;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
