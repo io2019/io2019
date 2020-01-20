@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order implements Comparable<Order> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

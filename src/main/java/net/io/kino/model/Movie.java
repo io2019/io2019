@@ -8,7 +8,6 @@ import java.time.Duration;
 
 @Entity
 @Table(name = "movies")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie {
 
     @Id
