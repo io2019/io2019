@@ -61,7 +61,7 @@ public class Showtime {
     }
 
     public LocalDateTime getFinishHour() {
-        return date.plusMinutes(movie.getDuration().toMinutes());
+        return date.plusMinutes(movie.getDuration());
     }
 
 }

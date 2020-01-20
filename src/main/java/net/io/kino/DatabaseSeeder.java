@@ -49,7 +49,7 @@ public class DatabaseSeeder {
         if (movieRepository.findAll().isEmpty()) {
             Movie movie = new Movie();
             movie.setTitle("Królewna śnieżka");
-            movie.setDuration(Duration.ofHours(2));
+            movie.setDuration(120);
             movie.setAgeRestriction(12);
             movie.setDescription("Jakiś film");
             movie.setCategory(MovieCategory.Action);

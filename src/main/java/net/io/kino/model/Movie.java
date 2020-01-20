@@ -1,8 +1,5 @@
 package net.io.kino.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.time.Duration;
 
@@ -64,12 +61,12 @@ public class Movie {
         this.title = title;
     }
 
-    public Duration getDuration() {
-        return duration;
+    public long getDuration() {
+        return duration.toMinutes();
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setDuration(long duration) {
+        this.duration = Duration.ofMinutes(duration);
     }
 
     public String getDescription() {
