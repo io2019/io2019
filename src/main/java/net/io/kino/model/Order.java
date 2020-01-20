@@ -1,5 +1,7 @@
 package net.io.kino.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,7 +13,7 @@ public class Order implements Comparable<Order> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
     @Embedded
