@@ -13,7 +13,7 @@ public class Showtime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @OneToOne
     @JsonIdentityReference(alwaysAsId = true)
