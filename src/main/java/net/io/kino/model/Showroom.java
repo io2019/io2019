@@ -43,8 +43,16 @@ public class Showroom {
         this.noOfRows = nr;
     }
 
+    public Integer getNoOfRows() {
+        return noOfRows;
+    }
+
     public void setNoOfColumns(Integer nr) {
         this.noOfColumns = nr;
+    }
+
+    public Integer getNoOfColumns() {
+        return noOfColumns;
     }
 
 }
