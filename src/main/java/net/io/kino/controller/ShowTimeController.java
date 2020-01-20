@@ -62,12 +62,8 @@ public class ShowTimeController {
 
     @PutMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<HttpStatus> updateShowTime(@RequestBody ShowtimeRequest showtimeRequest, @PathVariable Long id) {
-        Showtime showtime = new Showtime();
+    public ResponseEntity<HttpStatus> updateShowtime(@PathVariable Long id, @RequestBody Showtime showtime) {
         showtime.setId(id);
-        showtime.setDate(showtimeRequest.getDateTime());
-        showtime.setMovie(movieService.getMovieById(showtimeRequest.getMovieId()));
-        showtime.setShowroom(showroomService.getShowroomById(showtimeRequest.getShowroomId()));
         try {
             showtimeService.updateShowtime(showtime);
         } catch(IllegalArgumentException e) {

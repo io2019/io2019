@@ -42,7 +42,8 @@ public class ShowRoomController {
 
     @PutMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<HttpStatus> updateShowRoom(@RequestBody Showroom showroom, @PathVariable Long id) {
+    public ResponseEntity<HttpStatus> updateShowroom(@PathVariable Long id, @RequestBody Showroom showroom) {
+        showroom.setId(id);
         try {
             showroomService.createShowroom(showroom);
         } catch(IllegalArgumentException e) {
