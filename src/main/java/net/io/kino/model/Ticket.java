@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import javax.persistence.*;
 
-@Embeddable
+@Entity
 public class Ticket {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Id
     private Long id;
 
     @OneToOne
