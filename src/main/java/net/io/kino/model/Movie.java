@@ -37,6 +37,10 @@ public class Movie {
         this.category = category;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public MovieCategory getCategory() {
         return category;
     }
