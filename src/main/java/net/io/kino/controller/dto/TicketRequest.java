@@ -33,7 +33,7 @@ public class TicketRequest {
         this.showtimeId = showtimeId;
     }
 
-    public Ticket convertToTicket(Showtime showtime) {
+    public Ticket convertToTicket(Showtime showtime, TicketType ticketType) {
         Ticket t = new Ticket();
         t.setTicketType(ticketType);
         t.setSeatPosition(seatPosition);
