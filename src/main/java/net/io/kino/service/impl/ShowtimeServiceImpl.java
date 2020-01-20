@@ -3,9 +3,13 @@ package net.io.kino.service.impl;
 import net.io.kino.model.Movie;
 import net.io.kino.model.Showroom;
 import net.io.kino.model.Showtime;
+import net.io.kino.model.loggingaction.EventData;
+import net.io.kino.model.loggingaction.EventType;
 import net.io.kino.repository.ShowtimeRepository;
 import net.io.kino.service.ShowtimeService;
+import net.io.kino.service.logger.LoggingOperations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,12 +21,17 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     @Autowired
     private ShowtimeRepository showtimeRepository;
 
+    @Qualifier("databaseLoggingOperationsImpl")
+    @Autowired
+    LoggingOperations loggingOperations;
+
     @Override
     public Showtime createShowtime(Showtime showtime) {
         if (showtimeRepository.findShowtimesByDateInShowroomBetween(showtime.getDate(), showtime.getFinishHour(), showtime.getShowroom().getId()).size() != 0) {
             throw new IllegalArgumentException("This showtime overlaps with another showtime.");
         }
 
+        loggingOperations.saveLog(new EventData("admin", EventType.SHOW_TIME_ADDED));
         return showtimeRepository.save(showtime);
     }
 
@@ -31,6 +40,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
         if(showtimeRepository.findShowtimeById(showtime.getId()) == null) {
             throw new IllegalArgumentException();
         } else {
+            loggingOperations.saveLog(new EventData("admin", EventType.SHOW_TIME_UPDATED));
             showtimeRepository.save(showtime);
         }
     }
