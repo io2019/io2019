@@ -7,6 +7,7 @@ import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 public class OrderController {
 
     ReservationService reservationService;
+
+    @Autowired
     ShowtimeService showtimeService;
 
     @PostMapping
@@ -35,6 +38,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public Order getOrder(@PathVariable Long id) {
         Optional<Order> order = reservationService.getOrderById(id);
         if (!order.isPresent()) {
@@ -44,11 +48,13 @@ public class OrderController {
     }
 
     @GetMapping(params = {"fromDate", "toDate"})
+    @PreAuthorize("isAuthenticated()")
     public List<Order> getOrders(@RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
         return reservationService.getOrders();
     }
 
     @PatchMapping("/{orderId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<HttpStatus> cancelOrder(@PathVariable Long orderId) {
         Optional<Order> order = reservationService.getOrderById(orderId);
         if (!order.isPresent()) {

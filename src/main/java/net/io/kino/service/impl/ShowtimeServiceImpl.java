@@ -6,10 +6,12 @@ import net.io.kino.model.Showtime;
 import net.io.kino.repository.ShowtimeRepository;
 import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class ShowtimeServiceImpl implements ShowtimeService {
 
     @Autowired

@@ -1,25 +1,20 @@
 package net.io.kino.controller;
 
 import net.io.kino.controller.dto.ShowtimeRequest;
-import net.io.kino.model.Movie;
-import net.io.kino.model.Showroom;
 import net.io.kino.model.Showtime;
-import net.io.kino.repository.ShowroomRepository;
-import net.io.kino.repository.ShowtimeRepository;
-import net.io.kino.service.ShowroomService;
 import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/showtimes")
 public class ShowTimeController {
 
+    @Autowired
     ShowtimeService showtimeService;
 
     @GetMapping
@@ -38,6 +33,7 @@ public class ShowTimeController {
     }
 
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public Showtime addShowTime(@RequestBody ShowtimeRequest showtimeRequest) {
         Showtime showtime = new Showtime();
         showtime.setDate(showtimeRequest.getDate());
