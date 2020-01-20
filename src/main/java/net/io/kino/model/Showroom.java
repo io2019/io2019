@@ -1,9 +1,5 @@
 package net.io.kino.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.springframework.beans.factory.annotation.Required;
-
 import javax.persistence.*;
 
 @Entity
@@ -24,9 +20,16 @@ public class Showroom {
         this.noOfRows = numberOfRows;
     }
 
-    public Showroom() {}
+    public Showroom() {
+    }
 
-    public Long getId() { return id;}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -43,4 +46,5 @@ public class Showroom {
     public void setNoOfColumns(Integer nr) {
         this.noOfColumns = nr;
     }
+
 }
