@@ -4,9 +4,11 @@ import net.io.kino.model.Showroom;
 import net.io.kino.repository.ShowroomRepository;
 import net.io.kino.service.ShowroomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ShowroomServiceImpl implements ShowroomService {
 
     @Autowired

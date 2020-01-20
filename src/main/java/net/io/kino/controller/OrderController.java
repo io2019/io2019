@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/orders")
 public class OrderController {
 
+    @Autowired
     ReservationService reservationService;
 
     @Autowired

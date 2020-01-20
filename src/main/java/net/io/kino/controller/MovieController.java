@@ -3,6 +3,7 @@ package net.io.kino.controller;
 import net.io.kino.controller.dto.MovieRequest;
 import net.io.kino.model.Movie;
 import net.io.kino.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @PreAuthorize("isAuthenticated()")
 public class MovieController {
 
+    @Autowired
     MovieService movieService;
 
     @GetMapping

@@ -3,6 +3,7 @@ package net.io.kino.controller;
 import net.io.kino.controller.dto.ShowroomRequest;
 import net.io.kino.model.Showroom;
 import net.io.kino.service.ShowroomService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("/showrooms")
 public class ShowRoomController {
 
+    @Autowired
     ShowroomService showroomService;
 
     @GetMapping
