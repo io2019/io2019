@@ -1,13 +1,11 @@
 package net.io.kino.service.impl;
 
 import net.io.kino.model.Movie;
-import net.io.kino.model.MovieCategory;
 import net.io.kino.repository.MovieRepository;
 import net.io.kino.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.util.List;
 
 @Service
