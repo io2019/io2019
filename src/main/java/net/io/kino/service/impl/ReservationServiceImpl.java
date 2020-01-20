@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -151,4 +152,10 @@ public class ReservationServiceImpl extends PayPalClientServiceImpl implements R
         return orders.findAll();
     }
 
+    @Override
+    public List<Order> getOrdersWithShowtime(long showtimeId) {
+        return orders.findAll().stream().filter(order -> order.getTickets().stream()
+                .anyMatch(ticket -> ticket.getShowtime().getId()==showtimeId))
+                .collect(Collectors.toList());
+    }
 }

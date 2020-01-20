@@ -1,8 +1,10 @@
 package net.io.kino.controller;
 
 import net.io.kino.controller.dto.ShowtimeRequest;
+import net.io.kino.controller.dto.ShowtimeResponse;
 import net.io.kino.model.Showtime;
 import net.io.kino.service.MovieService;
+import net.io.kino.service.ReservationService;
 import net.io.kino.service.ShowroomService;
 import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/showtimes")
@@ -22,6 +25,8 @@ public class ShowTimeController {
     MovieService movieService;
     @Autowired
     ShowroomService showroomService;
+    @Autowired
+    ReservationService reservationService;
 
     @GetMapping
     public List<Showtime> getShowTimes() {
@@ -37,8 +42,12 @@ public class ShowTimeController {
     }
 
     @GetMapping("/{id}")
-    public Showtime getShowTimeById(@PathVariable Long id) {
-        return showtimeService.getShowtimeById(id);
+    public ShowtimeResponse getShowTimeById(@PathVariable Long id) {
+        return ShowtimeResponse.of(showtimeService.getShowtimeById(id),
+                reservationService.getOrdersWithShowtime(id).stream()
+                        .flatMap(order -> order.getTickets().stream())
+                        .filter(ticket -> ticket.getShowtime().getId().equals(id))
+                        .collect(Collectors.toList()));
     }
 
     @PostMapping
