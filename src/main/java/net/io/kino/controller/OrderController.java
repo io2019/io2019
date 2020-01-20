@@ -7,6 +7,7 @@ import net.io.kino.repository.TicketTypesRepository;
 import net.io.kino.service.ReservationService;
 import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -59,7 +60,7 @@ public class OrderController {
 
     @GetMapping(params = {"fromDate", "toDate"})
     @PreAuthorize("isAuthenticated()")
-    public List<Order> getOrders(@RequestParam LocalDate fromDate, @RequestParam LocalDate toDate) {
+    public List<Order> getOrders(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate fromDate, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate toDate) {
         return reservationService.getOrdersBetweenDates(fromDate, toDate);
     }
 
