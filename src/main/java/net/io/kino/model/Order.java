@@ -13,16 +13,16 @@ public class Order implements Comparable<Order> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ElementCollection
-    @CollectionTable(
-            name = "TICKET",
-            joinColumns = @JoinColumn(name = "ORDER_ID")
-    )
+
+    @OneToMany
     private List<Ticket> tickets;
+
     @Embedded
     private PersonalDetails client;
+
     @Enumerated(EnumType.STRING)
     private OrderState state;
+
     private LocalDateTime date;
     private String transactionId;
 
