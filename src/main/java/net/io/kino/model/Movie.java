@@ -8,7 +8,6 @@ import java.time.Duration;
 
 @Entity
 @Table(name = "movies")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Movie {
 
     @Id
@@ -35,6 +34,10 @@ public class Movie {
         this.director = director;
         this.ageRestriction = ageRestriction;
         this.category = category;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public MovieCategory getCategory() {

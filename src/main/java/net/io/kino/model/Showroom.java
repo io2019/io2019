@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "showrooms")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Showroom {
 
     @Id
