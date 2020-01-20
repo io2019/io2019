@@ -26,10 +26,8 @@ public class ShowRoomController {
         return showroomService.getShowroomById(id);
     }
 
-    @GetMapping("/{name}")
-    public Showroom getShowRoom(@PathVariable String name) {
-        return showroomService.getShowroomByName(name);
-    }
+    @GetMapping(params = "name")
+    public Showroom getShowRoom(@RequestParam String name) { return showroomRepository.findShowroomByName(name); }
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
