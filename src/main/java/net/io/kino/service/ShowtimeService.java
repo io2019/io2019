@@ -1,5 +1,6 @@
 package net.io.kino.service;
 
+import net.io.kino.controller.dto.ShowtimeRequest;
 import net.io.kino.model.Movie;
 import net.io.kino.model.Showroom;
 import net.io.kino.model.Showtime;

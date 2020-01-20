@@ -27,7 +27,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void updateMovie(Movie movie) {
-        movies.save(movie);
+        if(movies.findMovieById(movie.getId()) == null) {
+            throw new IllegalArgumentException();
+        } else {
+            movies.save(movie);
+        }
     }
 
     @Override

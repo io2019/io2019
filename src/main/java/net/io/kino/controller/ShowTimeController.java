@@ -2,6 +2,8 @@ package net.io.kino.controller;
 
 import net.io.kino.controller.dto.ShowtimeRequest;
 import net.io.kino.model.Showtime;
+import net.io.kino.service.MovieService;
+import net.io.kino.service.ShowroomService;
 import net.io.kino.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +18,10 @@ public class ShowTimeController {
 
     @Autowired
     ShowtimeService showtimeService;
+    @Autowired
+    MovieService movieService;
+    @Autowired
+    ShowroomService showroomService;
 
     @GetMapping
     public List<Showtime> getShowTimes() {
@@ -39,11 +45,10 @@ public class ShowTimeController {
     @PreAuthorize("isAuthenticated()")
     public Showtime addShowTime(@RequestBody ShowtimeRequest showtimeRequest) {
         Showtime showtime = new Showtime();
-        showtime.setDate(showtimeRequest.getDate());
-        showtime.setMovie(showtimeRequest.getMovie());
-        showtime.setShowroom(showtimeRequest.getShowroom());
-        showtimeService.createShowtime(showtime);
-        return showtime;
+        showtime.setDate(showtimeRequest.getDateTime());
+        showtime.setMovie(movieService.getMovieById(showtimeRequest.getMovieId()));
+        showtime.setShowroom(showroomService.getShowroomById(showtimeRequest.getShowroomId()));
+        return showtimeService.createShowtime(showtime);
     }
 
 }

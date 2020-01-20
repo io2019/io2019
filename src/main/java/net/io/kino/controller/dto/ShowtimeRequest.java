@@ -4,7 +4,7 @@ import net.io.kino.model.Showtime;
 
 import java.time.LocalDateTime;
 
-public class ShowtimeRequest extends Showtime {
+public class ShowtimeRequest {
     private Long movieId;
     private Long showroomId;
     private LocalDateTime dateTime;

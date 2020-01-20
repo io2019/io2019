@@ -40,6 +40,10 @@ public class Movie {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public MovieCategory getCategory() {
         return category;
     }

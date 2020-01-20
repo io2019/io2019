@@ -42,10 +42,7 @@ public class OrderController {
     @PreAuthorize("isAuthenticated()")
     public Order getOrder(@PathVariable Long id) {
         Optional<Order> order = reservationService.getOrderById(id);
-        if (!order.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return order.get();
+        return order.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping(params = {"fromDate", "toDate"})
